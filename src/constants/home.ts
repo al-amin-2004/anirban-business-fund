@@ -198,16 +198,16 @@ export const contact = [
   {
     icon: Mail,
     label: "Email",
-    info: "dreamfuture@gmail.com",
+    info: "example@gmail.com",
   },
   {
     icon: MapPin,
     label: "Address",
-    info: "Bibir bagicha 3no gare, Jatrabari Dhaka, Bangladesh",
+    info: "203 Fake St. Mountain View, San Francisco, California, USA",
   },
   {
     icon: Clock,
     label: "Office Time",
-    info: "24/7 (Saturday – Friday)",
+    info: "24/7 (Saturday – Thursday)",
   },
 ];
