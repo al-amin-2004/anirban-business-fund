@@ -1,9 +1,39 @@
+"use client";
+
+import { ChangeEvent, SubmitEvent, useState } from "react";
 import Input from "@/app/_components/ui/Input";
 import { Button } from "@/components/ui/button";
 import { contact } from "@/constants/home";
 import { MessageCircle } from "lucide-react";
 
+interface inputDataType {
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+}
+
 export default function Contact() {
+  const [inputData, setInputdata] = useState<inputDataType>({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+
+  const onInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setInputdata({ ...inputData, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = (e: SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    alert({ inputData });
+  };
   return (
     <section id="contact" className="py-20 md:py-28 lg:py-32">
       <div className="container">
@@ -83,7 +113,7 @@ export default function Contact() {
                 </p>
               </div>
 
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={onSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="space-y-2.5">
                     <label htmlFor="name" className="text-sm font-medium">
@@ -96,6 +126,9 @@ export default function Contact() {
                       type="text"
                       placeholder="Enter your full name"
                       className="h-11 w-full"
+                      value={inputData.name}
+                      onChange={onInputChange}
+                      required
                     />
                   </div>
 
@@ -110,6 +143,9 @@ export default function Contact() {
                       type="email"
                       placeholder="Enter your email"
                       className="h-11 w-full"
+                      value={inputData.email}
+                      onChange={onInputChange}
+                      required
                     />
                   </div>
                 </div>
@@ -126,6 +162,8 @@ export default function Contact() {
                       type="tel"
                       placeholder="Enter your phone number"
                       className="h-11 w-full"
+                      value={inputData.phone}
+                      onChange={onInputChange}
                     />
                   </div>
 
@@ -140,6 +178,9 @@ export default function Contact() {
                       type="text"
                       placeholder="What is this about?"
                       className="h-11 w-full"
+                      value={inputData.subject}
+                      onChange={onInputChange}
+                      required
                     />
                   </div>
                 </div>
@@ -155,6 +196,9 @@ export default function Contact() {
                     rows={6}
                     placeholder="Write your message here..."
                     className="flex min-h-28 w-full resize-none rounded-md border border-input bg-background px-3 py-2 text-sm shadow-xs outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                    value={inputData.message}
+                    onChange={onInputChange}
+                    required
                   />
                 </div>
 
