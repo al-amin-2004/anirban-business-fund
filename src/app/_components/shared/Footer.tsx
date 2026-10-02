@@ -14,7 +14,7 @@ const Footer = () => {
             </h2>
           </Link>
 
-          <p className="max-w-md text-sm md:text-base md:leading-7 text-muted-foreground">
+          <p className="max-w-md text-sm md:text-base md:leading-6 text-muted-foreground">
             A member-driven initiative under Anirban Organization, built around
             collective contribution, business opportunities, and long-term
             growth.
