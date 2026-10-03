@@ -1,10 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import Input from "@/app/_components/ui/Input";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { signupSchema } from "@/schemas/signupSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
-import { CheckIcon, UserIcon } from "lucide-react";
+import { CheckIcon, EyeIcon, EyeOffIcon, UserIcon } from "lucide-react";
+import Link from "next/link";
+import z from "zod";
+import Input from "@/app/_components/ui/Input";
 import {
   AuthCard,
   AuthDescription,
@@ -12,10 +17,50 @@ import {
   AuthHeader,
   AuthTitle,
 } from "../_components/ui/AuthCard";
+import { toast } from "@/components/ui/toast";
+
+type SignUpFormData = z.infer<typeof signupSchema>;
 
 const SignUp = () => {
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignUpFormData>({
+    resolver: zodResolver(signupSchema),
+  });
+
+  const onSubmit = async (formData: SignUpFormData) => {
+    setIsLoading(true);
+
+    try {
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.add({
+          type: "error",
+          description: data.message || "Something Worng!",
+        });
+      } else {
+        toast.add({ type: "success", description: data.message });
+        router.push(`verification?userId=${data.userId}`);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <AuthCard className="mt-20">
       <AuthHeader>
@@ -26,7 +71,7 @@ const SignUp = () => {
         <AuthDescription>Enter your details to get started</AuthDescription>
       </AuthHeader>
 
-      <form className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Name */}
         <div className="space-y-2">
           <label htmlFor="name" className="text-sm font-medium">
@@ -37,8 +82,14 @@ const SignUp = () => {
             id="name"
             type="text"
             placeholder="Enter your full name"
+            {...register("fullName")}
             className="h-11 w-full"
           />
+          {errors.fullName && (
+            <p className="text-sm text-destructive">
+              {errors.fullName.message}
+            </p>
+          )}
         </div>
 
         {/* Email */}
@@ -51,8 +102,12 @@ const SignUp = () => {
             id="email"
             type="email"
             placeholder="Enter your email"
+            {...register("email")}
             className="h-11 w-full"
           />
+          {errors.email && (
+            <p className="text-sm text-destructive">{errors.email.message}</p>
+          )}
         </div>
 
         {/* Password */}
@@ -61,12 +116,27 @@ const SignUp = () => {
             Password
           </label>
 
-          <Input
-            id="password"
-            type="password"
-            placeholder="Create a password"
-            className="h-11 w-full"
-          />
+          <div className="relative">
+            <Input
+              id="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Create a password"
+              {...register("password")}
+              className="h-11 w-full"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute inset-y-0 right-0 pr-3 text-gray-500 md:hover:text-gray-300 transition-colors"
+            >
+              {showPassword ? <EyeOffIcon size={18} /> : <EyeIcon size={18} />}
+            </button>
+          </div>
+          {errors.password && (
+            <p className="text-sm text-destructive">
+              {errors.password.message}
+            </p>
+          )}
         </div>
 
         {/* Terms Checkbox */}

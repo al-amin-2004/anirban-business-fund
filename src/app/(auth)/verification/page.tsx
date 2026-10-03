@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { emailMasking } from "@/helpers/EmailMasking";
-import { ShieldCheck } from "lucide-react";
+import { Loader2, ShieldCheck } from "lucide-react";
 import {
   AuthCard,
   AuthDescription,
@@ -18,12 +18,100 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import { toast } from "@/components/ui/toast";
+import { formatTime } from "@/helpers/formatTime";
 
 const Verification = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [otp, setOtp] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [expiresAt, setExpiresAt] = useState<Date | null>(null);
+  const [seconds, setSeconds] = useState<number>(0);
+
+  const userId = searchParams.get("userId");
+
+  // Get Email
+  useEffect(() => {
+    const getInfo = async () => {
+      try {
+        const res = await fetch("/api/auth/getValidationOtp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userId }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          toast.add({ type: "error", description: data.message });
+        }
+
+        setEmail(data.email);
+        setExpiresAt(data.expiresAt);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (userId) getInfo();
+  }, [userId]);
+
+  // date to second convert
+  useEffect(() => {
+    if (!expiresAt) return;
+
+    const interval = setInterval(() => {
+      const remaining = Math.floor(
+        (new Date(expiresAt).getTime() - new Date().getTime()) / 1000,
+      );
+
+      setSeconds(remaining > 0 ? remaining : 0);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [expiresAt]);
+
+  const handleVerify = async () => {
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/auth/verification", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, otp }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.add({
+          type: "info",
+          description: data.message || "Something went wrong!",
+        });
+        return;
+      }
+
+      toast.add({
+        title: "Success",
+        description: data.message,
+        type: "success",
+        timeout: 1500,
+      });
+
+      setTimeout(() => {
+        router.push("/");
+      }, 1500);
+    } catch (error) {
+      console.error(error);
+      toast.add({ type: "error", description: "Server error" });
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <AuthCard className="mt-20 w-full space-y-6 p-6 md:max-w-md">
       <AuthHeader>
@@ -71,16 +159,23 @@ const Verification = () => {
         )}
 
         {/* Verify Button */}
-        <Button type="button" className="w-full">
-          Verify Email
+        <Button
+          onClick={handleVerify}
+          disabled={isLoading}
+          type="button"
+          className="w-full flex items-center justify-center gap-2"
+        >
+          {isLoading && <Loader2 className="animate-spin size-4" />}
+          {isLoading ? "Verifying..." : "Verify OTP"}
         </Button>
 
         {/* Resend OTP */}
         <button
           type="button"
-          className="text-sm text-muted-foreground transition-colors hover:text-primary hover:underline"
+          disabled={seconds > 0}
+          className="text-sm text-muted-foreground transition-colors hover:text-primary hover:underline disabled:cursor-wait"
         >
-          Resend OTP
+          {seconds > 0 ? `Resend OTP in ${formatTime(seconds)}s` : "Resend OTP"}
         </button>
       </div>
 
