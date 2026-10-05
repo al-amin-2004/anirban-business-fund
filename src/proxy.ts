@@ -12,7 +12,7 @@ export function proxy(request: NextRequest) {
   }
 
   // Redirect to home if the user is authenticated and trying to access an auth route
-  const authRoute = ["/signin", "/signout", "/verification"];
+  const authRoute = ["/signin", "/signup", "/verification"];
   if (token && authRoute.includes(pathname)) {
     return NextResponse.redirect(new URL("/", request.url));
   }
@@ -21,5 +21,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/profile/:path*", "/signin", "/signout", "/verification"],
+  matcher: ["/profile/:path*", "/signin", "/signup", "/verification"],
 };
