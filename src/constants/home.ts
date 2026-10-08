@@ -25,9 +25,9 @@ interface ICTALink {
 export const Navlist: itemsOfICTALink[] = [
   { link: "/profile", label: "Profile" },
   { link: "/gallery", label: "Gallery" },
-  { link: "/leaderboard", label: "Leaderboard" },
-  { link: "#about", label: "About us" },
-  { link: "#contact", label: "Contact us" },
+  { link: "/membership", label: "Membership" },
+  { link: "/#about", label: "About us" },
+  { link: "/#contact", label: "Contact us" },
 ];
 
 // Footer Navigations Items ===
