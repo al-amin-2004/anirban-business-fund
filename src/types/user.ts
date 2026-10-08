@@ -1,6 +1,7 @@
-import { country, gender, role } from "@/constants/user";
+import { blood, country, gender, role } from "@/constants/user";
 
 type Gender = (typeof gender)[number];
+type Blood = (typeof blood)[number];
 type Role = (typeof role)[number];
 type Country = (typeof country)[number];
 
@@ -19,7 +20,9 @@ export interface IUser {
 
   gender: Gender;
   dateOfBirth?: Date;
+  blood: Blood;
   nationality: Country;
+  address?: string;
 
   role: Role;
 

@@ -15,3 +15,20 @@ export const emailValidation = z
 export const passwordValidation = z
   .string()
   .min(8, "Password must be atleast 8 characters");
+
+export const dateOfBirthValidation = z
+  .string()
+  .optional()
+  .or(z.literal(""))
+  .refine(
+    (value) => {
+      if (!value) return true;
+
+      const selectedDate = new Date(value);
+      const today = new Date();
+      today.setHours(23, 59, 59, 999);
+
+      return selectedDate <= today;
+    },
+    { message: "Date of birth cannot be in the future." },
+  );

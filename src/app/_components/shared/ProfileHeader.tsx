@@ -6,9 +6,10 @@ import Image from "next/image";
 import { useSidebar } from "@/providers/SidebarContext";
 import { useUser } from "@/providers/UserContext";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ChevronDown, PanelLeft, PanelRight, User } from "lucide-react";
+import { cn } from "cn";
 import { Separator } from "@/components/ui/separator";
-import LogoutButton from "./LogoutButton";
+import { ChevronDown, PanelLeft, PanelRight, User } from "lucide-react";
+import SignoutButton from "./SignoutButton";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -32,6 +33,13 @@ const ProfileHeader = () => {
   const { open, toggle } = useSidebar();
   const [showLogoutDialog, setShowLogoutDialog] = useState<boolean>(false);
 
+  // Demo account
+  const accounts = [
+    { _id: "1", accName: "A" },
+    { _id: "2", accName: "B" },
+  ];
+  const activeAccount = { _id: "2" };
+
   return (
     <header className="py-4 px-6 flex items-center justify-end md:justify-between border-b-2">
       {/* left side */}
@@ -41,26 +49,24 @@ const ProfileHeader = () => {
 
       {/* right side */}
       <div className="flex items-center gap-4 md:gap-5">
-        {/* {accounts.length > 1 && (
+        {accounts.length > 1 && (
           <ul className="hidden md:flex gap-2.5">
             {accounts.map((account) => (
               <li
                 key={account._id}
-                onClick={() => setActiveAccount(account)}
                 className={cn(
-                  "py-1 px-2.5 bg-slate-400/25 text-slate-50 rounded-full flex justify-center items-center cursor-pointer",
-                  account._id === activeAccount?._id &&
-                    "text-green-500 ring ring-green-400 bg-green-500/15",
+                  "py-1 px-2.5 bg-muted rounded-full flex justify-center items-center cursor-pointer",
+                  {
+                    "text-green-500 ring ring-green-400":
+                      account._id === activeAccount?._id,
+                  },
                 )}
               >
                 {account.accName}
               </li>
             ))}
           </ul>
-        )} */}
-
-        {/* Rewards components */}
-        {/* <Rewards>{activeAccount?.totalRewards || 0}</Rewards> */}
+        )}
 
         <DropdownMenu>
           <DropdownMenuTrigger>
@@ -104,7 +110,7 @@ const ProfileHeader = () => {
             className="w-[calc(100vw-20px)] md:w-65 mr-2.5 p-2.5"
           >
             <DropdownMenuGroup className="shadow-xl bg-primary rounded-sm p-2 mb-2">
-              <DropdownMenuItem>
+              <DropdownMenuItem disabled className="data-disabled:opacity-100">
                 {user?.avatar ? (
                   <Image
                     src={user.avatar}
@@ -183,6 +189,7 @@ const ProfileHeader = () => {
             )}
 
             <DropdownMenuItem
+              variant="destructive"
               className="cursor-pointer"
               onClick={() => setShowLogoutDialog(true)}
             >
@@ -203,7 +210,7 @@ const ProfileHeader = () => {
             </DialogHeader>
             <DialogFooter>
               <DialogClose>Cancel</DialogClose>
-              <LogoutButton>Sure</LogoutButton>
+              <SignoutButton>Sure</SignoutButton>
             </DialogFooter>
           </DialogContent>
         </Dialog>

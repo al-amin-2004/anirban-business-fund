@@ -1,40 +1,42 @@
 import {
-  BadgeCheck,
+  ArrowLeftRight,
   BadgeQuestionMark,
   Book,
-  History,
+  HandCoins,
   LayoutDashboard,
   Settings,
   User,
   UserGroup,
-  UserRoundPen,
 } from "lucide-react";
 
 export const profileSidebarItems = [
   {
     items: [
+      { label: "Dashboard", icon: LayoutDashboard, link: "/profile/dashboard" },
       { label: "Profile", icon: User, link: "/profile" },
-      { label: "Dashboard", icon: LayoutDashboard, link: "/dashboard" },
-      { label: "History", icon: History, link: "/history" },
     ],
   },
   {
     title: "Membership",
     items: [
-      { label: "Membership", icon: UserGroup, link: "/membership" },
-      { label: "Apply", icon: BadgeCheck, link: "/apply" },
-      { label: "Passbook", icon: Book, link: "/passbook" },
+      { label: "Membership", icon: UserGroup, link: "/profile/membership" },
+      { label: "My Account", icon: HandCoins, link: "/profile/account" },
+      {
+        label: "Transactions",
+        icon: ArrowLeftRight,
+        link: "/profile/transactions",
+      },
+      { label: "Passbook", icon: Book, link: "/profile/passbook" },
     ],
   },
   {
     title: "Settings",
     items: [
-      { label: "Update Profile", icon: UserRoundPen, link: "/update-profile" },
-      { label: "Settings", icon: Settings, link: "/settings" },
+      { label: "Settings", icon: Settings, link: "/profile/settings" },
       {
         label: "Help & Support",
         icon: BadgeQuestionMark,
-        link: "/help-support",
+        link: "/profile/help-support",
       },
     ],
   },

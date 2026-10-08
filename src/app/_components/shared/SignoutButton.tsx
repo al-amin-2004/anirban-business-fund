@@ -1,9 +1,10 @@
 import { FC } from "react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toast";
 
-const LogoutButton: FC<{ children: React.ReactNode }> = ({ children }) => {
+const SignoutButton: FC<{ children: React.ReactNode }> = ({ children }) => {
+  const router = useRouter();
   const handleLogout = async () => {
     try {
       const res = await fetch("/api/auth/signout", { method: "POST" });
@@ -11,10 +12,10 @@ const LogoutButton: FC<{ children: React.ReactNode }> = ({ children }) => {
       if (!res.ok)
         return toast.add({
           type: "error",
-          description: data?.message || "Logout failed!",
+          description: data?.message || "Signout failed!",
         });
+      router.push("/");
       toast.add({ type: "success", description: data?.message });
-      redirect("/");
     } catch (err) {
       console.error(err);
       toast.add({ type: "error", description: "Something went wrong!" });
@@ -27,4 +28,4 @@ const LogoutButton: FC<{ children: React.ReactNode }> = ({ children }) => {
   );
 };
 
-export default LogoutButton;
+export default SignoutButton;
