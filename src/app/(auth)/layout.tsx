@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import style from "@/styles/rippleButton.module.css";
 
@@ -32,8 +33,14 @@ export default function AuthLayout({
             <ArrowLeft color="var(--primary)" />
           </Link>
 
-          <Link href="/" className="font-bold tracking-wide text-primary">
-            ANIRBAN
+          <Link href="/">
+            <Image
+              src="/logos/logo.png"
+              alt="Logo"
+              width={222}
+              height={89}
+              className="h-auto w-38 sm:w-40 lg:w-45"
+            />
           </Link>
         </div>
       </header>

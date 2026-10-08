@@ -1,6 +1,7 @@
 "use client";
 
 import { FC, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { BarsIcon, TimesIcon } from "@/icons";
 import { MoveRight } from "lucide-react";
@@ -12,8 +13,16 @@ const Header: FC = () => {
   const [navOpen, setNavOpen] = useState<boolean>(false);
   return (
     <header className="sticky top-0 mt-5 md:mt-10 z-99">
-      <div className="relative w-11/12 md:w-10/12 mx-auto p-0.5 px-2 md:p-3 rounded-md backdrop-blur-md bg-background/70 border flex justify-between items-center">
-        <Link href="/">Logo</Link>
+      <div className="relative w-11/12 md:w-10/12 mx-auto p-0.5 px-2 md:p-2 md:px-2.5 rounded-md backdrop-blur-md bg-background/70 border flex justify-between items-center">
+        <Link href="/">
+          <Image
+            src="/logos/logo.png"
+            alt="Logo"
+            width={222}
+            height={89}
+            className="h-auto w-38 sm:w-40 lg:w-45"
+          />
+        </Link>
 
         <div className="flex items-center gap-2 md:gap-14">
           <ul

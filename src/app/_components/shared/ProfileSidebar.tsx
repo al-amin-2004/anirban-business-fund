@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { cn } from "cn";
 import { Undo2 } from "lucide-react";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
 import { useSidebar } from "@/providers/SidebarContext";
 import { LeftArrowIcon } from "@/icons";
 import { profileSidebarItems } from "@/constants/profile";
@@ -29,6 +30,17 @@ const ProfileSidebar = () => {
         onClick={() => setNavOpen(!navOpen)}
       />
       <div className="md:p-1.5 overflow-y-scroll scrollbar-none h-full">
+        <div className="w-10/11 mx-auto p-2 px-4 border-b">
+          <Link href="/">
+            <Image
+              src="/logos/logo.png"
+              alt="Logo"
+              width={300}
+              height={100}
+              className="h-auto w-full"
+            />
+          </Link>
+        </div>
         <ul className="space-y-6 p-4">
           {profileSidebarItems.map(({ title, items }, idx) => (
             <div key={idx} className="space-y-0.5">

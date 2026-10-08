@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { footerLinks, socials } from "@/constants/home";
 
 const Footer = () => {
@@ -8,13 +9,17 @@ const Footer = () => {
         {/* Brand */}
         <div className="space-y-5 col-span-3 lg:col-span-2">
           {/* Logo */}
-          <Link href="/" className="inline-block">
-            <h2 className="text-2xl md:text-3xl font-bold text-primary">
-              Anirban Business Fund
-            </h2>
+          <Link href="/">
+            <Image
+              src="/logos/logo.png"
+              alt="Logo"
+              width={250}
+              height={100}
+              className="h-auto w-40 sm:w-45 lg:w-60"
+            />
           </Link>
 
-          <p className="max-w-md text-sm md:text-base md:leading-6 text-muted-foreground">
+          <p className="max-w-md text-sm md:text-base md:leading-6 text-muted-foreground mt-2.5">
             A member-driven initiative under Anirban Organization, built around
             collective contribution, business opportunities, and long-term
             growth.
@@ -72,10 +77,7 @@ const Footer = () => {
         <p>© 2026 Anirban Business Fund. All rights reserved.</p>
 
         <p>
-          A part of{" "}
-          <span className="font-semibold">
-            Anirban Organization
-          </span>
+          A part of <span className="font-semibold">Anirban Organization</span>
         </p>
       </div>
     </footer>
