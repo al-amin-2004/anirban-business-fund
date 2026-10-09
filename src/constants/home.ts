@@ -56,7 +56,10 @@ export const footerLinks: ICTALink[] = [
     items: [
       { link: "#", label: "Anirban Organization" },
       { link: "#", label: "Anirban Business Fund" },
-      { link: "#", label: "অনির্বাণ কল্যাণ তহবিল" },
+      {
+        link: "https://www.facebook.com/profile.php?id=61590425910149",
+        label: "অনির্বাণ কল্যাণ তহবিল",
+      },
       { link: "#", label: "Anirban Shop" },
     ],
   },

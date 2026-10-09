@@ -41,7 +41,7 @@ const Footer = () => {
 
           {/* Address */}
           <div className="pt-5 md:pt-8">
-            <h5 className="font-semibold bg-primary inline text-foreground p-1.5 pe-20 rounded-[15%_40%/40%_15%]">
+            <h5 className="font-semibold bg-primary inline text-white p-1.5 pe-20 rounded-[15%_40%/40%_15%]">
               Address
             </h5>
 
@@ -53,7 +53,7 @@ const Footer = () => {
 
         {footerLinks.map(({ name, items }) => (
           <div key={name} className="col-span-3 lg:col-span-1">
-            <h5 className="font-semibold bg-primary inline text-foreground p-1.5 pe-20 rounded-[15%_40%/40%_15%]">
+            <h5 className="font-semibold bg-primary inline text-white p-1.5 pe-20 rounded-[15%_40%/40%_15%]">
               {name}
             </h5>
 
@@ -61,6 +61,7 @@ const Footer = () => {
               {items.map(({ link, label }) => (
                 <li key={label}>
                   <Link
+                    target={name === "Organizations" ? "_blank" : "_self"}
                     href={link}
                     className="transition-colors hover:text-primary"
                   >
