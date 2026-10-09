@@ -4,6 +4,7 @@ import {
   Clock,
   HandCoins,
   Landmark,
+  LucideProps,
   Mail,
   MapPin,
   Phone,
@@ -31,7 +32,11 @@ export const Navlist: itemsOfICTALink[] = [
 ];
 
 // Footer Navigations Items ===
-export const socials = [
+interface Isocials {
+  icon: React.FC<LucideProps>;
+  link: string;
+}
+export const socials: Isocials[] = [
   { icon: YoutubeIcon, link: "#" },
   { icon: FacebookIcon, link: "#" },
   { icon: InstagramIcon, link: "#" },
@@ -61,13 +66,13 @@ export const footerLinks: ICTALink[] = [
 ];
 
 // ABF Stats ===
-interface ABFStatsTypes {
+interface IABFStats {
   number: number;
   desc: string;
   prefix?: string;
   suffix?: string;
 }
-export const abfStats: ABFStatsTypes[] = [
+export const abfStats: IABFStats[] = [
   {
     number: 35,
     desc: "Active Member",
@@ -87,7 +92,13 @@ export const abfStats: ABFStatsTypes[] = [
 ];
 
 // How ABF Works ===
-export const steps = [
+interface Isteps {
+  id: string;
+  icon: React.FC<LucideProps>;
+  title: string;
+  description: string;
+}
+export const steps: Isteps[] = [
   {
     id: "01",
     icon: UserPlus,
@@ -126,7 +137,12 @@ export const steps = [
 ];
 
 // Services ===
-export const servicescardData = [
+interface IservicescardData {
+  icon: React.FC<LucideProps>;
+  head: string;
+  desc: string;
+}
+export const servicescardData: IservicescardData[] = [
   {
     icon: UsersRound,
     head: "Member Participation",
@@ -145,7 +161,11 @@ export const servicescardData = [
 ];
 
 // FAQ ===
-export const faqs = [
+interface Ifaqs {
+  question: string;
+  answer: string;
+}
+export const faqs: Ifaqs[] = [
   {
     question: "What is Anirban Business Fund?",
     answer:
@@ -189,7 +209,12 @@ export const faqs = [
 ];
 
 // Contact ===
-export const contact = [
+interface Icontact {
+  icon: React.FC<LucideProps>;
+  label: string;
+  info: string;
+}
+export const contact: Icontact[] = [
   {
     icon: Phone,
     label: "Phone",
