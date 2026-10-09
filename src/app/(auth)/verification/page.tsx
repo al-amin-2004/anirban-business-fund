@@ -113,7 +113,7 @@ const Verification = () => {
     }
   };
   return (
-    <AuthCard className="mt-20 w-full space-y-6 p-6 md:max-w-md">
+    <AuthCard className="mt-24 w-full space-y-6 p-6 md:max-w-md">
       <AuthHeader>
         <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-full bg-primary/10 text-primary">
           <ShieldCheck className="size-7" />

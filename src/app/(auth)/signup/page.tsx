@@ -62,7 +62,7 @@ const SignUp = () => {
     }
   };
   return (
-    <AuthCard className="mt-20">
+    <AuthCard className="mt-24">
       <AuthHeader>
         <div className="inline-flex justify-center items-center size-16 md:size-12 rounded-full mb-4 ring md:ring-0 ring-primary bg-primary/10 text-primary">
           <UserIcon className="size-10 md:size-7" />

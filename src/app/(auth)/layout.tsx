@@ -42,11 +42,13 @@ export default function AuthLayout({
               className="h-auto w-38 sm:w-40 lg:w-45"
             />
           </Link>
+
+          <span className="w-10 md:hidden" />
         </div>
       </header>
 
       {/* Authentication page main content */}
-      <section className="relative z-10 min-h-screen flex justify-center md:items-center px-4 md:px-6 perspective-[1000px]">
+      <section className="relative z-10 min-h-full flex justify-center md:items-center px-4 md:px-6 perspective-[1000px]">
         {children}
       </section>
     </main>
