@@ -1,5 +1,6 @@
 import { ArrowRight, BriefcaseBusiness, Users, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const rightCardsContent = [
   {
@@ -73,10 +74,12 @@ const AboutABF = () => {
                 time.
               </p>
 
-              <Button variant="outline" className="group">
-                Learn More
-                <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
-              </Button>
+              <Link href="#how-abf-work">
+                <Button variant="outline" className="group">
+                  Learn More
+                  <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
             </div>
           </div>
 

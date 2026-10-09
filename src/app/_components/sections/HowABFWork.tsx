@@ -2,7 +2,7 @@ import { steps } from "@/constants/home";
 
 const HowABFWorks = () => {
   return (
-    <section className="py-7 md:py-16 lg:py-20">
+    <section id="how-abf-work" className="py-7 md:py-16 lg:py-20">
       <div className="container">
         {/* Heading */}
         <div className="max-w-3xl mx-auto text-center space-y-4">
