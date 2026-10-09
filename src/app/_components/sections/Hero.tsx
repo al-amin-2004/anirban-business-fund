@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import robotHand from "@/../public/robothand.png";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -23,9 +24,13 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
-            <Button>Become a Member</Button>
+            <Link href="/membership">
+              <Button>Become a Member</Button>
+            </Link>
 
-            <Button variant="outline">Learn More</Button>
+            <Link href="#about">
+              <Button variant="outline">Learn More</Button>
+            </Link>
           </div>
         </div>
 

@@ -191,11 +191,11 @@ SIDEBAR  → Dark Green */
   }
 
   html {
-    @apply font-sans;
+    @apply font-sans scroll-smooth;
   }
 
   body {
-    @apply bg-background text-foreground scroll-smooth;
+    @apply bg-background text-foreground;
   }
 
   .container {
