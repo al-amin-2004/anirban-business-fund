@@ -13,9 +13,9 @@ const Footer = () => {
             <Image
               src="/logos/logo.png"
               alt="Logo"
-              width={250}
+              width={280}
               height={100}
-              className="h-auto w-40 sm:w-45 lg:w-60"
+              className="h-auto w-45 lg:w-60 mx-auto md:m-0"
             />
           </Link>
 
