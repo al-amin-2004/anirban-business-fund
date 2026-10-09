@@ -19,7 +19,7 @@ export const profileSidebarItems = [
   {
     title: "Membership",
     items: [
-      { label: "Membership", icon: UserGroup, link: "/profile/membership" },
+      { label: "Membership", icon: UserGroup, link: "/membership" },
       { label: "My Account", icon: HandCoins, link: "/profile/account" },
       {
         label: "Transactions",
