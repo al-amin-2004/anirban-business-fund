@@ -32,14 +32,14 @@ const HowABFWorks = () => {
               const Icon = step.icon;
 
               return (
-                <div key={step.id} className="relative group text-center">
+                <div key={step.number} className="relative group text-center">
                   {/* Number / Icon */}
                   <div className="relative z-10 mx-auto flex size-16 items-center justify-center rounded-2xl border border-primary/20 bg-background text-primary shadow-sm transition-all duration-300 group-hover:border-primary/40 group-hover:bg-primary group-hover:text-primary-foreground">
                     <Icon className="size-7" />
                   </div>
 
                   <span className="mt-4 block text-xs font-semibold tracking-[0.2em] text-primary">
-                    STEP {step.id}
+                    STEP {step.number}
                   </span>
 
                   <h3 className="mt-2 text-lg md:text-xl font-semibold">

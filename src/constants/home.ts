@@ -14,16 +14,23 @@ import {
   WalletCards,
 } from "lucide-react";
 
-interface itemsOfICTALink {
+export interface IcardCommon {
+  number: string;
+  icon: React.FC<LucideProps>;
+  title: string;
+  description: string;
+}
+
+interface IitemsOfICTALink {
   link: string;
   label: string;
 }
 interface ICTALink {
   name: string;
-  items: itemsOfICTALink[];
+  items: IitemsOfICTALink[];
 }
 // Header Navigations Items ===
-export const Navlist: itemsOfICTALink[] = [
+export const Navlist: IitemsOfICTALink[] = [
   { link: "/profile", label: "Profile" },
   { link: "/gallery", label: "Gallery" },
   { link: "/membership", label: "Membership" },
@@ -92,43 +99,37 @@ export const abfStats: IABFStats[] = [
 ];
 
 // How ABF Works ===
-interface Isteps {
-  id: string;
-  icon: React.FC<LucideProps>;
-  title: string;
-  description: string;
-}
-export const steps: Isteps[] = [
+export const steps: IcardCommon[] = [
   {
-    id: "01",
+    number: "01",
     icon: UserPlus,
     title: "Become a Member",
     description:
       "Join Anirban Business Fund and become part of a community built around collective participation.",
   },
   {
-    id: "02",
+    number: "02",
     icon: WalletCards,
     title: "Contribute Regularly",
     description:
       "Members make regular contributions according to the fund's established rules and schedule.",
   },
   {
-    id: "03",
+    number: "03",
     icon: Landmark,
     title: "Build the Fund",
     description:
       "Regular contributions come together to create a collective fund for suitable opportunities.",
   },
   {
-    id: "04",
+    number: "04",
     icon: BriefcaseBusiness,
     title: "Explore Opportunities",
     description:
       "The fund can be considered for suitable business and investment opportunities through responsible decision-making.",
   },
   {
-    id: "05",
+    number: "05",
     icon: TrendingUp,
     title: "Grow Together",
     description:
