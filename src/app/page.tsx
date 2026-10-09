@@ -12,6 +12,7 @@ export default function Home() {
   return (
     <>
       <div
+        aria-hidden="true"
         className="absolute w-full h-240 top-0 -z-50 pointer-events-none"
         style={{
           backgroundImage: `radial-gradient(circle at 78% 24%,rgba(212, 167, 44, 0.10) 0, transparent 40%),
@@ -24,9 +25,9 @@ export default function Home() {
       <Hero />
       <AboutABF />
       <ABFStats />
-      <HowABFWorks/>
+      <HowABFWorks />
       <Services />
-      <FAQ/>
+      <FAQ />
       <Contact />
       <Footer />
     </>
