@@ -32,7 +32,7 @@ const MembershipHero = () => {
           {/* CTA */}
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
-              href="/membership/apply"
+              href="/profile/membership/apply"
               className="inline-flex items-center justify-center gap-2 rounded-md bg-primary py-3 px-6 text-sm font-medium text-primary-foreground shadow-sm transition-all duration-200 hover:bg-primary/90"
             >
               Start Membership Process
