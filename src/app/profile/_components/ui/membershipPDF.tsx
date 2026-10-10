@@ -140,7 +140,7 @@ const MembershipPDF: FC<MembershipPDFApplicant> = (applicant) => {
 
         {/* Watermark Section */}
         <View fixed style={styles.watermarkContainer}>
-          
+          {/* eslint-disable-next-line jsx-a11y/alt-text */}
           <Image src="/logos/anirban-logo.png" style={styles.watermarkImage} />
         </View>
 
