@@ -72,27 +72,27 @@ const ProfileHeader = () => {
           <DropdownMenuTrigger>
             {loading ? (
               <div className="flex items-center space-x-3">
-                <Skeleton className="size-12 rounded-full" />
-                <div className="space-y-2">
+                <Skeleton className="size-10 rounded-full" />
+                <div className="space-y-2 hidden md:block">
                   <Skeleton className="h-4 w-37.5" />
                   <Skeleton className="h-4 w-20" />
                 </div>
               </div>
             ) : (
-              <div className="text-start md:px-2.5 md:py-1.5 rounded-full border flex items-center gap-3 cursor-pointer">
+              <div className="text-start md:px-2 md:py-1.5 rounded-full border flex items-center gap-3 cursor-pointer">
                 {user?.avatar ? (
                   <Image
                     src={user.avatar}
                     width={300}
                     height={300}
                     alt="Profile Picture"
-                    className="size-7 ring-2 ring-ring rounded-full"
+                    className="size-9 ring-2 ring-ring rounded-full"
                   />
                 ) : (
-                  <User className="size-7 p-1 ring-2 ring-ring rounded-full" />
+                  <User className="size-9 p-1 ring-2 ring-ring rounded-full" />
                 )}
 
-                <Separator orientation="vertical" />
+                <Separator orientation="vertical" className="hidden md:block"/>
 
                 <div className="hidden md:block">
                   <h2 className="font-semibold text-sm leading-4 tracking-wider">
