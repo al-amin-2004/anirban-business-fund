@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "@/components/ui/toast";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Loading2 } from "@/icons";
 import { blood, country, gender } from "@/constants/user";
 import { Option, Select } from "../_components/ui/Select";
 import { useForm } from "react-hook-form";
@@ -15,6 +14,7 @@ import Image from "next/image";
 import z from "zod";
 import ProfilePagesTitle from "../_components/ui/ProfilePagesTitle";
 import Input from "../_components/ui/Input";
+import Loader from "@/components/ui/loader";
 import {
   Card,
   CardContent,
@@ -167,7 +167,7 @@ const Profile = () => {
   if (loading)
     return (
       <div className="flex justify-center items-center h-[calc(100vh-85px)]">
-        <Loading2 />
+        <Loader />
       </div>
     );
 
@@ -180,6 +180,7 @@ const Profile = () => {
   }
 
   const currentAvatar = avatarPreview || user.avatar || "";
+
   return (
     <main className="space-y-4 pb-4">
       {/* ====== PAGE TITLE COMPONENT ====== */}
@@ -200,7 +201,7 @@ const Profile = () => {
           className="pointer-events-none absolute -bottom-24 right-24 size-72 rounded-full border-55 border-[#D4A72C]/10"
         />
 
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between p-4 md:p-8">
+        <div className="flex gap-6 items-start lg:items-center justify-between p-3 md:p-8">
           {/* Identity */}
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
             <div className="relative shrink-0">
@@ -244,10 +245,10 @@ const Profile = () => {
           {/* Edit button */}
           <label
             htmlFor="avatar-upload"
-            className="inline-flex items-center text-sm py-2 px-2.5 border-border hover:bg-muted dark:border-input bg-primary dark:hover:bg-input rounded-full cursor-pointer"
+            className="inline-flex items-center justify-center gap-1.5 p-2.5 lg:px-3 text-sm border-border hover:bg-muted dark:border-input bg-primary dark:hover:bg-input rounded-full cursor-pointer"
           >
-            <Pencil className="mr-2 size-4" />
-            Edit Avatar
+            <Pencil className="size-5" />
+            <span className="hidden lg:block">Edit Avatar</span>
           </label>
           <input
             id="avatar-upload"
@@ -259,7 +260,7 @@ const Profile = () => {
         </div>
 
         {/* Bottom information */}
-        <div className="flex flex-wrap items-center gap-x-10 gap-y-3 text-sm border-t bg-black/5 p-4 px-6 md:px-8">
+        <div className="flex flex-wrap items-center justify-between sm:justify-start gap-x-10 gap-y-3 text-sm border-t bg-black/5 p-4 md:px-8">
           <span className="font-medium">Good Morning 👋</span>
           <div className="flex items-center gap-1.5">
             <ShieldCheck className="size-4 text-[#D4A72C]" />
@@ -272,12 +273,9 @@ const Profile = () => {
       <Separator />
 
       {/* ========= CONTENT GRID ========== */}
-      <section className="grid gap-6 lg:grid-cols-5">
+      <section className="grid gap-6 grid-cols-2 lg:grid-cols-5">
         {/* LEFT */}
-        <div
-          className="space-y-6
-          col-span-2 lg:col-span-3"
-        >
+        <div className="space-y-6 col-span-2 lg:col-span-5 xl:col-span-3">
           {/* Profile Overview */}
           <Card>
             <CardHeader>
@@ -287,7 +285,7 @@ const Profile = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid gap-6 sm:grid-cols-2">
+              <div className="space-y-5 sm:grid md:block lg:grid gap-6 sm:grid-cols-2">
                 {/* Full Name */}
                 <ProfileContentBox
                   title="Full Name"
@@ -372,7 +370,7 @@ const Profile = () => {
             </CardHeader>
 
             <CardContent>
-              <div className="flex items-center justify-between rounded-xl border bg-muted/20 p-4">
+              <div className="flex items-center justify-between rounded-xl border bg-muted/20 p-3 sm:p-4">
                 <div className="flex items-center gap-3">
                   <div className="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <UsersRound className="size-5" />
@@ -396,7 +394,7 @@ const Profile = () => {
         </div>
 
         {/* RIGHT */}
-        <div className="lg:col-span-2">
+        <div className="col-span-2 lg:col-span-5 xl:col-span-2">
           {/* Edit Personal Information */}
           <Card>
             <CardHeader>
@@ -407,7 +405,7 @@ const Profile = () => {
             <CardContent>
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="grid lg:grid-cols-2 gap-x-3 gap-y-4"
+                className="space-y-3 sm:grid md:block lg:grid xl:block 2xl:grid lg:grid-cols-2 gap-x-3 gap-y-4"
               >
                 {/* Name */}
                 <InputBox htmlFor="name" label="Name" type="required">

@@ -16,7 +16,7 @@ export default function ProfileLayout({
 
           <div className="flex-1 overflow-y-scroll">
             <ProfileHeader />
-            {/* <section className="px-6 md:px-14">{children}</section> */}
+            <section className="px-6 lg:px-14">{children}</section>
           </div>
         </main>
       </SidebarProvider>
