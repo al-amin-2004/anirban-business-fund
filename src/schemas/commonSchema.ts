@@ -32,3 +32,11 @@ export const dateOfBirthValidation = z
     },
     { message: "Date of birth cannot be in the future." },
   );
+
+  export const accountNameValidation = z.object({
+  accountName: z
+    .string()
+    .trim()
+    .min(2, "Account name is required")
+    .max(20, "Account name must be 20 characters or fewer"),
+});

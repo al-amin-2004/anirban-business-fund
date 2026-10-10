@@ -11,6 +11,8 @@
   "dependencies": {
     "@base-ui/react": "^1.8.0",
     "@hookform/resolvers": "^5.9.1",
+    "@react-pdf/renderer": "^4.9.0",
+    "@stepperize/react": "^8.0.0",
     "@tailwindcss/postcss": "^4.3.3",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
