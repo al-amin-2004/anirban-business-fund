@@ -2,6 +2,7 @@ import {
   ArrowLeftRight,
   BadgeQuestionMark,
   Book,
+  FileUser,
   HandCoins,
   LayoutDashboard,
   Settings,
@@ -27,6 +28,7 @@ export const profileSidebarItems = [
         link: "/profile/transactions",
       },
       { label: "Passbook", icon: Book, link: "/profile/passbook" },
+      { label: "Apply", icon: FileUser, link: "/profile/membership-apply" },
     ],
   },
   {
