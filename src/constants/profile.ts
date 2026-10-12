@@ -1,3 +1,4 @@
+import { FC } from "react";
 import {
   ArrowLeftRight,
   BadgeQuestionMark,
@@ -10,7 +11,6 @@ import {
   User,
   UserGroup,
 } from "lucide-react";
-import { FC } from "react";
 
 type SidebarItemsTypes = {
   label: string;
@@ -18,7 +18,7 @@ type SidebarItemsTypes = {
   link: string;
 };
 
-interface IProfileSidebarItems {
+export interface IProfileSidebarItems {
   title?: string;
   items: SidebarItemsTypes[];
 }
