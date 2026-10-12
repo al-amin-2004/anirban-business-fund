@@ -5,12 +5,25 @@ import {
   FileUser,
   HandCoins,
   LayoutDashboard,
+  LucideProps,
   Settings,
   User,
   UserGroup,
 } from "lucide-react";
+import { FC } from "react";
 
-export const profileSidebarItems = [
+type SidebarItemsTypes = {
+  label: string;
+  icon: FC<LucideProps>;
+  link: string;
+};
+
+interface IProfileSidebarItems {
+  title?: string;
+  items: SidebarItemsTypes[];
+}
+
+export const profileSidebarItems: IProfileSidebarItems[] = [
   {
     items: [
       { label: "Dashboard", icon: LayoutDashboard, link: "/profile/dashboard" },
