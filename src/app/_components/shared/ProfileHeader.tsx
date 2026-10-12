@@ -8,7 +8,7 @@ import { useUser } from "@/providers/UserContext";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "cn";
 import { Separator } from "@/components/ui/separator";
-import { ChevronDown, PanelLeft, PanelRight, User } from "lucide-react";
+import { Bell, ChevronDown, PanelLeft, PanelRight, User } from "lucide-react";
 import SignoutButton from "../ui/SignoutButton";
 import {
   DropdownMenu,
@@ -68,6 +68,8 @@ const ProfileHeader = () => {
           </ul>
         )}
 
+        <Bell className="cursor-pointer" />
+
         <DropdownMenu>
           <DropdownMenuTrigger>
             {loading ? (
@@ -92,7 +94,7 @@ const ProfileHeader = () => {
                   <User className="size-9 p-1 ring-2 ring-ring rounded-full" />
                 )}
 
-                <Separator orientation="vertical" className="hidden md:block"/>
+                <Separator orientation="vertical" className="hidden md:block" />
 
                 <div className="hidden md:block">
                   <h2 className="font-semibold text-sm leading-4 tracking-wider">
