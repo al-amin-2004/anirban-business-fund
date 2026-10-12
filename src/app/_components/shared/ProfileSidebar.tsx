@@ -41,7 +41,7 @@ const ProfileSidebar = () => {
             />
           </Link>
         </div>
-        <ul className="space-y-6 p-4">
+        <ul className="space-y-4 p-4">
           {profileSidebarItems.map(({ title, items }, idx) => (
             <div key={idx} className="space-y-0.5">
               {open && (
