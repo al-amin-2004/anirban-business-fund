@@ -9,7 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "cn";
 import { Separator } from "@/components/ui/separator";
 import { ChevronDown, PanelLeft, PanelRight, User } from "lucide-react";
-import SignoutButton from "./SignoutButton";
+import SignoutButton from "../ui/SignoutButton";
 import {
   DropdownMenu,
   DropdownMenuContent,
