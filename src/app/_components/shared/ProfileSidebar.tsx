@@ -45,7 +45,7 @@ const ProfileSidebar = () => {
           {profileSidebarItems.map(({ title, items }, idx) => (
             <div key={idx} className="space-y-0.5">
               {open && (
-                <h4 className="text-sm text-primary font-bold">{title}</h4>
+                <h4 className="text-xs text-primary font-bold">{title}</h4>
               )}
               {items.map((item) => {
                 const navActive = pathname === item.link;
