@@ -10,7 +10,7 @@ import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import Input from "@/app/_components/ui/Input";
 import MembershipPDF, {
   type MembershipPDFApplicant,
-} from "../_components/ui/membershipPDF";
+} from "../../_components/ui/membershipPDF";
 import {
   ArrowLeft,
   ArrowRight,

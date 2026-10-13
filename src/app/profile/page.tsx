@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 import { updateProfileSchema } from "@/schemas/UpdateProfileSchema";
 import Image from "next/image";
 import z from "zod";
-import ProfilePagesTitle from "../_components/ui/ProfilePagesTitle";
+import PagesTitle from "../_components/ui/PagesTitle";
 import Input from "../_components/ui/Input";
 import Loader from "@/components/ui/loader";
 import {
@@ -184,7 +184,7 @@ const Profile = () => {
   return (
     <main className="space-y-4 pb-4">
       {/* ====== PAGE TITLE COMPONENT ====== */}
-      <ProfilePagesTitle
+      <PagesTitle
         title="Profile"
         description="Manage your personal information and profile preferences."
       />
