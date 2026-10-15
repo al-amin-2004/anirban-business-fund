@@ -47,11 +47,9 @@ export async function POST(reqeust: Request) {
 
     // Cookie set with JWT ===
     if (!jwtSecret) throw new Error("JWT_SECRET is not defiend!");
-    const token = jwt.sign(
-      { userId: user._id, email: user.email, role: user.role },
-      jwtSecret,
-      { expiresIn: "40d" },
-    );
+    const token = jwt.sign({ userId: user._id, role: user.role }, jwtSecret, {
+      expiresIn: "40d",
+    });
 
     const cookieStore = await cookies();
     cookieStore.set("auth_token", token, {
