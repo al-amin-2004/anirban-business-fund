@@ -1,6 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 
-import { getAuthUserId } from "@/helpers/getUserId";
+import { getAuthUser } from "@/helpers/getUser";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/models/User";
 
@@ -87,7 +87,7 @@ export async function PATCH(request: Request) {
     } = await request.json();
 
     // Get decoded form getAuthUserId ===
-    const auth = await getAuthUserId();
+    const auth = await getAuthUser();
     if (!auth.success) {
       return Response.json(
         { success: false, message: auth.message },
@@ -95,7 +95,7 @@ export async function PATCH(request: Request) {
       );
     }
 
-    const user = await UserModel.findById(auth.decoded?.userId);
+    const user = await UserModel.findById(auth.userId);
     if (!user) {
       return Response.json(
         { success: false, message: "User not found." },

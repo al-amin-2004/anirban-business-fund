@@ -1,4 +1,4 @@
-import { getAuthUserId } from "@/helpers/getUserId";
+import { getAuthUser } from "@/helpers/getUser";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/models/User";
 
@@ -6,7 +6,7 @@ export async function GET() {
   try {
     await dbConnect();
 
-    const auth = await getAuthUserId();
+    const auth = await getAuthUser();
     if (!auth.success) {
       return Response.json(
         { success: false, message: auth.message },
@@ -14,7 +14,7 @@ export async function GET() {
       );
     }
 
-    const user = await UserModel.findOne({ _id: auth.decoded?.userId })
+    const user = await UserModel.findOne({ _id: auth.userId })
       .select("-password")
       .lean();
 
