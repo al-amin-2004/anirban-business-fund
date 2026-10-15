@@ -2,7 +2,7 @@ import { blood, country, gender, role } from "@/constants/user";
 
 type Gender = (typeof gender)[number];
 type Blood = (typeof blood)[number];
-type Role = (typeof role)[number];
+export type Role = (typeof role)[number];
 type Country = (typeof country)[number];
 
 export interface IUser {
