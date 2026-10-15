@@ -37,6 +37,7 @@ const AdminSidebar = () => {
               alt="Logo"
               width={300}
               height={100}
+              loading="eager"
               className="h-auto w-full"
             />
           </Link>
