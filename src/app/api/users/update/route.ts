@@ -70,7 +70,7 @@ export async function POST(request: Request) {
   }
 }
 
-// Profile Update API functiob ===
+// Profile Update API function ===
 export async function PATCH(request: Request) {
   try {
     await dbConnect();
