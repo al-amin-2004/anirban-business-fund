@@ -7,6 +7,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { accountNameValidation } from "@/schemas/commonSchema";
 import { cn } from "cn";
 import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import ErrorMessage from "@/app/_components/ui/ErrorMessage";
 import Input from "@/app/_components/ui/Input";
 import MembershipPDF, {
   type MembershipPDFApplicant,
@@ -284,9 +285,7 @@ const Page = () => {
                     />
 
                     {errors.accountName && (
-                      <p className="text-xs text-destructive">
-                        {errors.accountName}
-                      </p>
+                      <ErrorMessage>{errors.accountName}</ErrorMessage>
                     )}
                   </div>
 

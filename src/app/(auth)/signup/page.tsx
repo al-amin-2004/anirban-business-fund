@@ -7,7 +7,9 @@ import { signupSchema } from "@/schemas/signupSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { CheckIcon, EyeIcon, EyeOffIcon, UserIcon } from "lucide-react";
+import { toast } from "@/components/ui/toast";
 import Link from "next/link";
+import ErrorMessage from "@/app/_components/ui/ErrorMessage";
 import z from "zod";
 import Input from "@/app/_components/ui/Input";
 import {
@@ -17,7 +19,6 @@ import {
   AuthHeader,
   AuthTitle,
 } from "../_components/ui/AuthCard";
-import { toast } from "@/components/ui/toast";
 
 type SignUpFormData = z.infer<typeof signupSchema>;
 
@@ -86,9 +87,7 @@ const SignUp = () => {
             className="h-11 w-full"
           />
           {errors.fullName && (
-            <p className="text-sm text-destructive">
-              {errors.fullName.message}
-            </p>
+            <ErrorMessage>{errors.fullName.message}</ErrorMessage>
           )}
         </div>
 
@@ -105,9 +104,7 @@ const SignUp = () => {
             {...register("email")}
             className="h-11 w-full"
           />
-          {errors.email && (
-            <p className="text-sm text-destructive">{errors.email.message}</p>
-          )}
+          {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         </div>
 
         {/* Password */}
@@ -133,9 +130,7 @@ const SignUp = () => {
             </button>
           </div>
           {errors.password && (
-            <p className="text-sm text-destructive">
-              {errors.password.message}
-            </p>
+            <ErrorMessage>{errors.password.message}</ErrorMessage>
           )}
         </div>
 

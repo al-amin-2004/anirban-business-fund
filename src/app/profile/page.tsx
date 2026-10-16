@@ -10,6 +10,7 @@ import { blood, country, gender } from "@/constants/user";
 import { Option, Select } from "../_components/ui/Select";
 import { useForm } from "react-hook-form";
 import { updateProfileSchema } from "@/schemas/UpdateProfileSchema";
+import ErrorMessage from "../_components/ui/ErrorMessage";
 import Image from "next/image";
 import z from "zod";
 import PagesTitle from "../_components/ui/PagesTitle";
@@ -411,9 +412,7 @@ const Profile = () => {
                 <InputBox htmlFor="name" label="Name" type="required">
                   <Input id="name" type="text" {...register("fullName")} />
                   {errors.fullName && (
-                    <p className="text-xs text-destructive">
-                      {errors.fullName.message}
-                    </p>
+                    <ErrorMessage>{errors.fullName.message}</ErrorMessage>
                   )}
                 </InputBox>
 
@@ -440,9 +439,7 @@ const Profile = () => {
                     {...register("dateOfBirth")}
                   />
                   {errors.dateOfBirth && (
-                    <p className="text-xs text-destructive">
-                      {errors.dateOfBirth.message}
-                    </p>
+                    <ErrorMessage>{errors.dateOfBirth.message}</ErrorMessage>
                   )}
                 </InputBox>
 

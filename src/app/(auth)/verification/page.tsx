@@ -5,6 +5,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { emailMasking } from "@/helpers/EmailMasking";
 import { Loader2, ShieldCheck } from "lucide-react";
+import { toast } from "@/components/ui/toast";
+import { formatTime } from "@/helpers/formatTime";
+import ErrorMessage from "@/app/_components/ui/ErrorMessage";
 import {
   AuthCard,
   AuthDescription,
@@ -18,8 +21,6 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { toast } from "@/components/ui/toast";
-import { formatTime } from "@/helpers/formatTime";
 
 const Verification = () => {
   const router = useRouter();
@@ -154,9 +155,7 @@ const Verification = () => {
         </InputOTP>
 
         {/* OTP Error — validation/API error later */}
-        {error && (
-          <p className="text-center text-sm text-destructive">{error}</p>
-        )}
+        {error && <ErrorMessage>{error}</ErrorMessage>}
 
         {/* Verify Button */}
         <Button

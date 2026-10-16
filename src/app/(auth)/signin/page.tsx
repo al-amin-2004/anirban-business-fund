@@ -10,6 +10,7 @@ import { EyeIcon, EyeOffIcon, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Input from "@/app/_components/ui/Input";
+import ErrorMessage from "@/app/_components/ui/ErrorMessage";
 import z from "zod";
 import {
   AuthCard,
@@ -96,9 +97,7 @@ const SignIn = () => {
             className="h-11"
           />
 
-          {errors.email && (
-            <p className="text-sm text-destructive">{errors.email.message}</p>
-          )}
+          {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         </div>
 
         {/* Password */}
@@ -133,9 +132,7 @@ const SignIn = () => {
             </button>
           </div>
           {errors.password && (
-            <p className="text-sm text-destructive">
-              {errors.password.message}
-            </p>
+            <ErrorMessage>{errors.password.message}</ErrorMessage>
           )}
         </div>
 
