@@ -1,14 +1,17 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useAllUsers } from "@/providers/AllUsersContext";
 import { RoleBadge } from "@/app/_components/ui/RoleBadge";
 import { Option, Select } from "@/app/_components/ui/Select";
 import { IUser, Role } from "@/types";
 import { role } from "@/constants/user";
 import { EllipsisVertical } from "lucide-react";
+import { useAllUsers } from "@/providers/AllUsersContext";
 import PagesTitle from "@/app/_components/ui/PagesTitle";
 import Input from "@/app/_components/ui/Input";
+import ViewProfile from "../../_components/ViewProfile";
+import EditProfile from "../../_components/EditProfile";
+import ChangeRole from "../../_components/ChangeRole";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,6 +23,7 @@ const Page = () => {
   const { allUsers } = useAllUsers();
   const [search, setSearch] = useState<string>("");
   const [roleFilter, setRoleFilter] = useState<"all" | Role>("all");
+
   const [viewProfile, setViewProfile] = useState<IUser | null>(null);
   const [editProfile, setEditProfile] = useState<IUser | null>(null);
   const [changeRole, setChangeRole] = useState<IUser | null>(null);
@@ -120,6 +124,26 @@ const Page = () => {
           </tbody>
         </table>
       </section>
+
+      {/* ====== All action Dialog components here ====== */}
+      <ViewProfile
+        title="User"
+        open={!!viewProfile}
+        onClose={() => setViewProfile(null)}
+        user={viewProfile}
+      />
+      <EditProfile
+        title="User"
+        open={!!editProfile}
+        onClose={() => setEditProfile(null)}
+        user={editProfile}
+      />
+      <ChangeRole
+        title="User"
+        open={!!changeRole}
+        onClose={() => setChangeRole(null)}
+        user={changeRole}
+      />
     </main>
   );
 };

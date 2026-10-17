@@ -6,7 +6,7 @@ function Select({ className, children, ...props }: ComponentProps<"select">) {
     <select
       data-slot="select"
       className={cn(
-        "w-full appearance-none py-2 px-3 border border-gray-700 rounded-sm md:rounded-md text-sm text-foreground capitalize outline-none focus:ring md:focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 cursor-pointer",
+        "w-full appearance-none py-2 px-3 border border-gray-700 rounded-sm md:rounded-md text-sm text-foreground capitalize outline-none focus:ring md:focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 cursor-pointer mt-0.5",
         className,
       )}
       {...props}
