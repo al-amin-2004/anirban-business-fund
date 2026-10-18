@@ -1,0 +1,41 @@
+import { accStatus } from "@/constants/account";
+import { IAccount } from "@/types";
+import mongoose, { Schema } from "mongoose";
+
+const accountSchema = new Schema<IAccount>(
+  {
+    userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+
+    accName: {
+      type: String,
+      maxlength: [20, "Name can't be more than 20 characters."],
+      required: [true, "Please provide an Account name."],
+    },
+    accNumber: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+
+    status: { type: String, enum: accStatus, default: "active" },
+
+    totalDeposit: { type: Number, default: 0 },
+    totalProfit: { type: Number, default: 0 },
+    currentBalance: { type: Number, default: 0 },
+
+    identification: {
+      birthId: { type: String, trim: true },
+      nid: { type: String, trim: true },
+      dateOfBirth: { type: Date, required: true },
+    },
+  },
+  { timestamps: true },
+);
+
+accountSchema.index({ userId: 1, accName: 1 }, { unique: true });
+
+const AccountModel =
+  (mongoose.models.Accounts as mongoose.Model<IAccount>) ||
+  mongoose.model<IAccount>("Accounts", accountSchema);
+
+export default AccountModel;

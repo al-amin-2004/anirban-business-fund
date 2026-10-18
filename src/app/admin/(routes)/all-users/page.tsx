@@ -18,6 +18,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import CreateAccount from "../../_components/CreateAccount";
 
 const Page = () => {
   const { allUsers } = useAllUsers();
@@ -27,6 +28,7 @@ const Page = () => {
   const [viewProfile, setViewProfile] = useState<IUser | null>(null);
   const [editProfile, setEditProfile] = useState<IUser | null>(null);
   const [changeRole, setChangeRole] = useState<IUser | null>(null);
+  const [createAccOpen, setCreateAccOpen] = useState<IUser | null>(null);
 
   const filteredUsers = useMemo(() => {
     return allUsers.filter((user) => {
@@ -105,7 +107,10 @@ const Page = () => {
                     <DropdownMenuTrigger className="cursor-pointer">
                       <EllipsisVertical />
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="p-1.5">
+                    <DropdownMenuContent
+                      className="p-1.5 min-w-37"
+                      align="center"
+                    >
                       <DropdownMenuItem onClick={() => setViewProfile(user)}>
                         View Profile
                       </DropdownMenuItem>
@@ -115,6 +120,13 @@ const Page = () => {
                       <DropdownMenuItem onClick={() => setChangeRole(user)}>
                         Change Role
                       </DropdownMenuItem>
+                      {user.role === "user" && (
+                        <DropdownMenuItem
+                          onClick={() => setCreateAccOpen(user)}
+                        >
+                          Create Account
+                        </DropdownMenuItem>
+                      )}
                       <DropdownMenuItem disabled>Delete User</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -143,6 +155,11 @@ const Page = () => {
         open={!!changeRole}
         onClose={() => setChangeRole(null)}
         user={changeRole}
+      />
+      <CreateAccount
+        open={!!createAccOpen}
+        onClose={() => setCreateAccOpen(null)}
+        user={createAccOpen}
       />
     </main>
   );

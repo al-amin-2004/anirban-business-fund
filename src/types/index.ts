@@ -6,3 +6,4 @@ export interface IconSvgProps extends SVGProps<SVGSVGElement>, IClassName {}
 
 export * from "./user";
 export * from "./otpValidation";
+export * from "./account";

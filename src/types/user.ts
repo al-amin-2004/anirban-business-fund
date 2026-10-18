@@ -25,11 +25,6 @@ export interface IUser {
   address?: string;
 
   role: Role;
-
-  identification: {
-    birthId?: string;
-    nid?: string;
-  };
 }
 
 export interface IUserWithPassword extends IUser {
