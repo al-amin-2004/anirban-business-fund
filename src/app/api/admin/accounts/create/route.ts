@@ -6,27 +6,25 @@ import UserModel from "@/models/User";
 import { generateUniqueAccountNumber } from "@/helpers/generateAccountNumber";
 
 export async function POST(req: Request) {
-  const auth = await getAuthUser();
-
-  if (!auth.success) {
-    return Response.json(
-      { success: false, message: auth.message },
-      { status: auth.status },
-    );
-  }
-
-  if (auth.role !== "admin") {
-    return Response.json(
-      { success: false, message: "Forbidden" },
-      { status: 403 },
-    );
-  }
-
   try {
     await dbConnect();
 
+    const auth = await getAuthUser();
+    if (!auth.success) {
+      return Response.json(
+        { success: false, message: auth.message },
+        { status: auth.status },
+      );
+    }
+    if (auth.role !== "admin") {
+      return Response.json(
+        { success: false, message: "Forbidden" },
+        { status: 403 },
+      );
+    }
+
     const { userId, accName, identification } = await req.json();
-    if (!userId || !accName.trim() || !identification) {
+    if (!userId || !accName || !identification) {
       return Response.json(
         { success: false, message: "Missing data" },
         { status: 400 },

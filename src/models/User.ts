@@ -6,7 +6,7 @@ const userSchema = new Schema<IUserWithPassword>(
   {
     fullName: {
       type: String,
-      maxLength: [20, "Name can't be more than 20 characters."],
+      maxLength: [30, "Name can't be more than 30 characters."],
       required: [true, "Please provide a name."],
     },
     username: {
@@ -36,10 +36,6 @@ const userSchema = new Schema<IUserWithPassword>(
     nationality: { type: String, enum: country, default: "bangladesh" },
     address: String,
     role: { type: String, enum: role, default: "user" },
-    identification: {
-      birthId: { type: String, trim: true },
-      nid: { type: String, trim: true },
-    },
   },
   { timestamps: true },
 );
