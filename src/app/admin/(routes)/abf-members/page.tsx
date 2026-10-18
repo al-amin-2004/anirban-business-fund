@@ -1,21 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { IUser } from "@/types";
-import { Plus, EllipsisVertical } from "lucide-react";
+import { EllipsisVertical } from "lucide-react";
 import PagesTitle from "@/app/_components/ui/PagesTitle";
 import Input from "@/app/_components/ui/Input";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,6 +20,7 @@ import ChangeRole from "../../_components/ChangeRole";
 const Page = () => {
   const { allUsers } = useAllUsers();
   const [search, setSearch] = useState("");
+
   const [viewProfile, setViewProfile] = useState<IUser | null>(null);
   const [editProfile, setEditProfile] = useState<IUser | null>(null);
   const [changeRole, setChangeRole] = useState<IUser | null>(null);
@@ -55,31 +46,7 @@ const Page = () => {
       <PagesTitle
         title="Members"
         description="Manage ABF members and membership status information."
-      >
-        <Dialog>
-          <DialogTrigger
-            render={
-              <Button>
-                <Plus />
-                Add Member
-              </Button>
-            }
-          />
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>No Close Button</DialogTitle>
-              <DialogDescription>
-                This dialog doesn&apos;t have a close button in the top-right
-                corner.
-              </DialogDescription>
-            </DialogHeader>
-            <DialogFooter>
-              <DialogClose render={<Button variant="outline">Cancle</Button>} />
-              <Button type="submit">Save</Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      </PagesTitle>
+      />
 
       {/* Filters */}
       <Input
