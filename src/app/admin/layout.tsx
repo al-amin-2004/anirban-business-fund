@@ -2,12 +2,20 @@ import { SidebarProvider } from "@/providers/SidebarContext";
 import AdminSidebar from "../_components/shared/AdminSidebar";
 import AdminHeader from "../_components/shared/AdminHeader";
 import { AllUsersProvider } from "@/providers/AllUsersContext";
+import { getAuthUser } from "@/helpers/getUser";
+import { redirect } from "next/navigation";
 
-export default function AdminLayout({
+export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const auth = await getAuthUser();
+
+  if (!auth.success) redirect("/signin");
+
+  if (auth.role !== "admin") redirect("/");
+
   return (
     <AllUsersProvider>
       <SidebarProvider>
