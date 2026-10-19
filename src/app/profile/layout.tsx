@@ -2,12 +2,17 @@ import { SidebarProvider } from "@/providers/SidebarContext";
 import ProfileSidebar from "../_components/shared/ProfileSidebar";
 import ProfileHeader from "../_components/shared/ProfileHeader";
 import { UserProvider } from "@/providers/UserContext";
+import { getAuthUser } from "@/helpers/getUser";
+import { redirect } from "next/navigation";
 
-export default function ProfileLayout({
+export default async function ProfileLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const auth = await getAuthUser();
+  if (!auth.success) redirect("/signin");
+
   return (
     <UserProvider>
       <SidebarProvider>
