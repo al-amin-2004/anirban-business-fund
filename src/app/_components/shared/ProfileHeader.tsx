@@ -1,15 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { useSidebar } from "@/providers/SidebarContext";
 import { useUser } from "@/providers/UserContext";
+import { useAccounts } from "@/providers/AccountContext";
+import { useSidebar } from "@/providers/SidebarContext";
 import { Skeleton } from "@/components/ui/skeleton";
-import { cn } from "cn";
 import { Separator } from "@/components/ui/separator";
 import { Bell, ChevronDown, PanelLeft, PanelRight, User } from "lucide-react";
+import AccountSelector from "@/app/profile/_components/ui/AccountSelector";
 import SignoutButton from "../ui/SignoutButton";
+import Link from "next/link";
+import Image from "next/image";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,15 +31,9 @@ import {
 
 const ProfileHeader = () => {
   const { user, loading } = useUser();
+  const { accounts } = useAccounts();
   const { open, toggle } = useSidebar();
   const [showLogoutDialog, setShowLogoutDialog] = useState<boolean>(false);
-
-  // Demo account
-  const accounts = [
-    { _id: "1", accName: "A" },
-    { _id: "2", accName: "B" },
-  ];
-  const activeAccount = { _id: "2" };
 
   return (
     <header className="py-4 px-6 flex items-center justify-end md:justify-between border-b-2">
@@ -49,24 +44,7 @@ const ProfileHeader = () => {
 
       {/* right side */}
       <div className="flex items-center gap-4 md:gap-5">
-        {accounts.length > 1 && (
-          <ul className="hidden md:flex gap-2.5">
-            {accounts.map((account) => (
-              <li
-                key={account._id}
-                className={cn(
-                  "py-1 px-2.5 bg-muted rounded-full flex justify-center items-center cursor-pointer",
-                  {
-                    "text-green-500 ring ring-green-400":
-                      account._id === activeAccount?._id,
-                  },
-                )}
-              >
-                {account.accName}
-              </li>
-            ))}
-          </ul>
-        )}
+        {accounts.length > 1 && <AccountSelector />}
 
         <Bell className="cursor-pointer" />
 
