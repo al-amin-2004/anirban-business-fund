@@ -13,14 +13,17 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export default function AccountSelector() {
+export default function AccountSelector({ className }: { className?: string }) {
   const { accounts, activeAccount, setActiveAccount } = useAccounts();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button variant="outline" className="rounded-lg px-3 py-2">
+          <Button
+            variant="outline"
+            className={`rounded-lg px-3 py-2 ${className}`}
+          >
             {activeAccount?.accName ?? "Select account"}
             <ChevronsUpDown className="size-4 text-muted-foreground ms-2" />
           </Button>

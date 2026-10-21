@@ -6,7 +6,7 @@ import { useAccounts } from "@/providers/AccountContext";
 import { useSidebar } from "@/providers/SidebarContext";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Separator } from "@/components/ui/separator";
-import { Bell, ChevronDown, PanelLeft, PanelRight, User } from "lucide-react";
+import { ChevronDown, PanelLeft, PanelRight, User } from "lucide-react";
 import AccountSelector from "@/app/profile/_components/ui/AccountSelector";
 import SignoutButton from "../ui/SignoutButton";
 import Link from "next/link";
@@ -44,9 +44,9 @@ const ProfileHeader = () => {
 
       {/* right side */}
       <div className="flex items-center gap-4 md:gap-5">
-        {accounts.length > 1 && <AccountSelector />}
+        {accounts.length > 1 && <AccountSelector className="hidden md:flex" />}
 
-        <Bell className="cursor-pointer" />
+        {/* <Bell className="cursor-pointer" /> */}
 
         <DropdownMenu>
           <DropdownMenuTrigger>
@@ -86,8 +86,8 @@ const ProfileHeader = () => {
           </DropdownMenuTrigger>
 
           <DropdownMenuContent
-            align="start"
-            className="w-[calc(100vw-20px)] md:w-65 mr-2.5 p-2.5"
+            align="center"
+            className="w-[calc(100vw-28px)] sm:w-full mr-2.5 p-2.5"
           >
             <DropdownMenuGroup className="shadow-xl bg-primary rounded-sm p-2 mb-2">
               <DropdownMenuItem disabled className="data-disabled:opacity-100">
@@ -114,48 +114,11 @@ const ProfileHeader = () => {
                   </p>
                 </div>
               </DropdownMenuItem>
-
-              {/* {accounts.length > 1 && (
-                <Select
-                  value={activeAccount ? String(activeAccount._id) : undefined}
-                  onValueChange={(value) => {
-                    const selected = accounts.find(
-                      (acc) => String(acc._id) === value,
-                    );
-                    if (selected) setActiveAccount(selected);
-                  }}
-                >
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select account" />
-                  </SelectTrigger>
-
-                  <SelectContent>
-                    {accounts.map((account) => (
-                      <SelectItem
-                        key={String(account._id)}
-                        value={String(account._id)}
-                      >
-                        Account {account.accName}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              )} */}
             </DropdownMenuGroup>
 
-            <DropdownMenuItem
-              className="p-0"
-              onSelect={(e) => e.preventDefault()}
-            >
-              {/* <FinancialAccCreatepage
-                btnClass="px-2 p-1.5 text-inharit bg-inherit hover:bg-inherit hover:translate-0 w-full rounded justify-start"
-                btnLabel={
-                  accounts.length === 0
-                    ? "Open an Account"
-                    : "Open another Account"
-                }
-              /> */}
-            </DropdownMenuItem>
+            {accounts.length > 1 && (
+              <AccountSelector className="w-full justify-between" />
+            )}
 
             {user?.role === "admin" && (
               <div>
