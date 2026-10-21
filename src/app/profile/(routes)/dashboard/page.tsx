@@ -1,7 +1,7 @@
-import React from "react";
+import ComingSoon from "@/app/_components/ui/coming-soon";
 
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return <ComingSoon title="Dashboard" description="This feature is currently under development. Please check back later for updates." />;
 };
 
 export default Dashboard;
