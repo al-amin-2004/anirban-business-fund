@@ -69,8 +69,8 @@ const Page = () => {
   if (!user) return;
 
   return (
-    <main className="min-h-screen py-10">
-      <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
+    <main className="pb-4">
+      <div className="mx-auto w-full max-w-5xl sm:px-6">
         <div className="mb-6">
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-foreground">
             Membership Application
