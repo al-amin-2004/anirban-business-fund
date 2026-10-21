@@ -222,12 +222,12 @@ export const contact: Icontact[] = [
   {
     icon: Phone,
     label: "Phone",
-    info: "+880 1XXXXXXXXX",
+    info: "+8801609305655",
   },
   {
     icon: Mail,
     label: "Email",
-    info: "example@gmail.com",
+    info: "anirbanbusinessfund@gmail.com",
   },
   {
     icon: MapPin,
