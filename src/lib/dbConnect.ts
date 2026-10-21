@@ -7,7 +7,7 @@ const dbConnect = async (): Promise<void> => {
   if (isDbConnected) return;
 
   try {
-    mongoose.connect(URI, { dbName: "Anirban-Organization-Fund" });
+    mongoose.connect(URI, { dbName: "Anirban-Business-Fund" });
     isDbConnected = true;
   } catch (error) {
     console.error("DB connection error!, the error is:", error);
