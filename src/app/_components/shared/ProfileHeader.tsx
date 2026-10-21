@@ -87,7 +87,7 @@ const ProfileHeader = () => {
 
           <DropdownMenuContent
             align="center"
-            className="w-[calc(100vw-28px)] sm:w-full mr-2.5 p-2.5"
+            className="w-[calc(100vw-28px)] sm:w-68 mr-2.5 p-2.5"
           >
             <DropdownMenuGroup className="shadow-xl bg-primary rounded-sm p-2 mb-2">
               <DropdownMenuItem disabled className="data-disabled:opacity-100">
