@@ -21,6 +21,11 @@ export async function GET() {
       .lean();
 
     // If no accounts found, return a 404 response ===
+    if (!accounts) {
+      return Response.json({ success: false, account: null }, { status: 404 });
+    }
+
+    // If no accounts found, return a 404 response ===
     if (accounts.length === 0) {
       return Response.json(
         { success: false, message: "account not found" },
