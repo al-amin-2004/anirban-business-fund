@@ -81,13 +81,13 @@ const ProfileSidebar = () => {
       <Link
         href="/"
         className={cn(
-          "w-full absolute bottom-0 flex items-center justify-center gap-1 rounded-t-lg bg-background hover:bg-slate-300/30 border-t",
+          "w-full absolute bottom-0 flex items-center justify-center gap-1 rounded-t-lg bg-background hover:bg-slate-300/30 border-t overflow-hidden",
         )}
       >
         <div className="p-2.5 rounded-full">
           <Undo2 />
         </div>
-        <p>{open && !navOpen && "Back to Home"}</p>
+        <p>{open && "Back to Home"}</p>
       </Link>
     </aside>
   );
