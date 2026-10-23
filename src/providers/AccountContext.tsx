@@ -1,5 +1,6 @@
 "use client";
 
+import { IAccount } from "@/types";
 import {
   createContext,
   useContext,
@@ -7,7 +8,6 @@ import {
   useEffect,
   ReactNode,
 } from "react";
-import { IAccount } from "@/types";
 
 interface AccountContextType {
   accounts: IAccount[];
@@ -36,7 +36,7 @@ export const AccountProvider = ({ children }: { children: ReactNode }) => {
       const res = await fetch("/api/accounts/me", { cache: "no-store" });
       const data = await res.json();
 
-      if (data.success && Array.isArray(data.accounts)) {
+      if (data.ok && Array.isArray(data.accounts)) {
         setAccounts(data.accounts);
         setActiveAccount((prev) => prev ?? data.accounts[0] ?? null);
       } else {
