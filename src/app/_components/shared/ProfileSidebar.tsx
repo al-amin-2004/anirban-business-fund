@@ -9,11 +9,21 @@ import { usePathname } from "next/navigation";
 import { useSidebar } from "@/providers/SidebarContext";
 import { LeftArrowIcon } from "@/icons";
 import { profileSidebarItems } from "@/constants/profile";
+import { useUser } from "@/providers/UserContext";
 
 const ProfileSidebar = () => {
   const pathname = usePathname();
   const [navOpen, setNavOpen] = useState<boolean>(false);
   const { open } = useSidebar();
+  const { user } = useUser();
+
+  const filteredSidebarItems = profileSidebarItems
+    .map((section) => {
+      if (section.title === "Account" && user?.role === "user") return null;
+      return section;
+    })
+    .filter(Boolean);
+
   return (
     <aside
       className={cn(
@@ -42,39 +52,48 @@ const ProfileSidebar = () => {
           </Link>
         </div>
         <ul className="space-y-4 p-4">
-          {profileSidebarItems.map(({ title, items }, idx) => (
-            <div key={idx} className="space-y-0.5">
-              {open && (
-                <h4 className="text-xs text-primary font-bold">{title}</h4>
-              )}
-              {items.map((item) => {
-                const navActive = pathname === item.link;
-                return (
-                  <li key={item.label} onClick={() => setNavOpen(false)}>
-                    <Link
-                      href={item.link}
-                      className={cn(
-                        "flex items-center gap-1 rounded ms-2 text-sm text-nowrap cursor-pointer",
-                        { "hover:bg-slate-400/20": open },
-                        { "bg-primary": open && navActive },
-                      )}
-                    >
-                      <div
+          {filteredSidebarItems.map((section, idx) => {
+            if (!section) return null;
+
+            const { title, items } = section;
+
+            return (
+              <div key={idx} className="space-y-0.5">
+                {open && title && (
+                  <h4 className="text-xs text-primary font-bold">{title}</h4>
+                )}
+
+                {items.map((item) => {
+                  const navActive = pathname === item.link;
+
+                  return (
+                    <li key={item.label} onClick={() => setNavOpen(false)}>
+                      <Link
+                        href={item.link}
                         className={cn(
-                          "p-2 rounded-full",
-                          { "hover:bg-slate-400/20": !open && !navActive },
-                          { "bg-primary": !open && navActive },
+                          "flex items-center gap-1 rounded ms-2 text-sm text-nowrap cursor-pointer",
+                          { "hover:bg-slate-400/20": open },
+                          { "bg-primary": open && navActive },
                         )}
                       >
-                        <item.icon className="size-5" />
-                      </div>
-                      <p>{open && item.label}</p>
-                    </Link>
-                  </li>
-                );
-              })}
-            </div>
-          ))}
+                        <div
+                          className={cn(
+                            "p-2 rounded-full",
+                            { "hover:bg-slate-400/20": !open && !navActive },
+                            { "bg-primary": !open && navActive },
+                          )}
+                        >
+                          <item.icon className="size-5" />
+                        </div>
+
+                        <p>{open && item.label}</p>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </div>
+            );
+          })}
         </ul>
       </div>
 

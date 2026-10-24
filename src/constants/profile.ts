@@ -31,9 +31,8 @@ export const profileSidebarItems: IProfileSidebarItems[] = [
     ],
   },
   {
-    title: "Membership",
+    title: "Account",
     items: [
-      { label: "Membership", icon: UserGroup, link: "/membership" },
       { label: "My Account", icon: HandCoins, link: "/profile/account" },
       {
         label: "Transactions",
@@ -41,6 +40,12 @@ export const profileSidebarItems: IProfileSidebarItems[] = [
         link: "/profile/transactions",
       },
       { label: "Passbook", icon: Book, link: "/profile/passbook" },
+    ],
+  },
+  {
+    title: "Membership",
+    items: [
+      { label: "Membership", icon: UserGroup, link: "/membership" },
       { label: "Apply", icon: FileUser, link: "/profile/membership-apply" },
     ],
   },
