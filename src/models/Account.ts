@@ -13,6 +13,7 @@ const accountSchema = new Schema<IAccount>(
     },
     accNumber: {
       type: String,
+      length: [10, "Account number must be 10 characters long."],
       required: true,
       unique: true,
     },
