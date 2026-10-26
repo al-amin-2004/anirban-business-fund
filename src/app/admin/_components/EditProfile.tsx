@@ -301,7 +301,7 @@ const EditProfile: FC<EditProfileProps> = ({ user, open, onClose, title }) => {
         </div>
 
         <DialogFooter>
-          <DialogClose render={<Button variant="outline">Cancle</Button>} />
+          <DialogClose render={<Button variant="outline">Cancel</Button>} />
 
           <Button
             type="submit"
