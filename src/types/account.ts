@@ -14,6 +14,7 @@ export interface IAccount {
 
   totalDeposit: number;
   totalProfit: number;
+  upcomingProfit: number;
   currentBalance: number;
 
   createdAt: Date;

@@ -82,7 +82,7 @@ export default function Page() {
       />
 
       {/* Main balance and two summary cards */}
-      <section className="grid gap-5 xl:grid-cols-[1.25fr_1fr]">
+      <section className="grid gap-5 xl:grid-cols-[0.75fr_1fr]">
         {/* Main balance card */}
         <Card className="relative overflow-hidden bg-linear-to-br from-emerald-950 via-emerald-900 to-emerald-700 shadow-md">
           {/* Add decorative background elements for the main balance card */}
@@ -126,8 +126,8 @@ export default function Page() {
           </CardContent>
         </Card>
 
-        {/* Only two summary cards */}
-        <div className="grid gap-5 sm:grid-cols-2">
+        {/* Only three summary cards */}
+        <div className="grid gap-5 sm:grid-cols-3">
           <SummaryCard
             title="Total Deposit"
             amount={activeAccount.totalDeposit}
@@ -140,6 +140,13 @@ export default function Page() {
             amount={activeAccount.totalProfit}
             description="Total accumulated profit"
             icon={TrendingUp}
+          />
+
+          <SummaryCard
+            title="Upcoming Profit - (إن شاء الله)"
+            amount={activeAccount.upcomingProfit}
+            description="Expected profit for the next period"
+            icon={HandCoins}
           />
         </div>
       </section>

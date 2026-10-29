@@ -22,6 +22,7 @@ const accountSchema = new Schema<IAccount>(
 
     totalDeposit: { type: Number, default: 0 },
     totalProfit: { type: Number, default: 0 },
+    upcomingProfit: { type: Number, default: 0 },
     currentBalance: { type: Number, default: 0 },
 
     identification: {
