@@ -13,9 +13,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAllUsers } from "@/providers/AllUsersContext";
-import ViewProfile from "../../_components/ViewProfile";
-import EditProfile from "../../_components/EditProfile";
-import ChangeRole from "../../_components/ChangeRole";
+import ViewProfile from "../../_components/users/ViewProfile";
+import EditProfile from "../../_components/users/EditProfile";
+import ChangeRole from "../../_components/users/ChangeRole";
 
 const Page = () => {
   const { allUsers } = useAllUsers();

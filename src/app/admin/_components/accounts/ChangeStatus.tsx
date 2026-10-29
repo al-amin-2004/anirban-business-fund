@@ -6,6 +6,7 @@ import { accStatus } from "@/constants/account";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toast";
 import { Option, Select } from "@/app/_components/ui/Select";
+import { cn } from "cn";
 import {
   Dialog,
   DialogClose,
@@ -15,7 +16,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { cn } from "cn";
 
 interface ChangeStatusProps {
   account: IAccount | null;

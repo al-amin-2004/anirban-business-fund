@@ -9,16 +9,16 @@ import { EllipsisVertical } from "lucide-react";
 import { useAllUsers } from "@/providers/AllUsersContext";
 import PagesTitle from "@/app/_components/ui/PagesTitle";
 import Input from "@/app/_components/ui/Input";
-import ViewProfile from "../../_components/ViewProfile";
-import EditProfile from "../../_components/EditProfile";
-import ChangeRole from "../../_components/ChangeRole";
+import ViewProfile from "../../_components/users/ViewProfile";
+import EditProfile from "../../_components/users/EditProfile";
+import ChangeRole from "../../_components/users/ChangeRole";
+import CreateAccount from "../../_components/users/CreateAccount";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import CreateAccount from "../../_components/CreateAccount";
 
 const Page = () => {
   const { allUsers } = useAllUsers();
