@@ -27,7 +27,7 @@ interface CreateAccountProps {
 }
 
 const CreateAccount = ({ open, onClose, user }: CreateAccountProps) => {
-  const [submitting, setSubmitting] = useState(false);
+  const [submitting, setSubmitting] = useState<boolean>(false);
 
   const {
     register,
