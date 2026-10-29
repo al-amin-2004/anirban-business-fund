@@ -3,6 +3,7 @@ import { IAccount } from "@/types";
 import { createMapById } from "@/helpers/createMapById";
 import { useAllUsers } from "@/providers/AllUsersContext";
 import { Button } from "@/components/ui/button";
+import { DialogInfoRow } from "../DialogInfoRow";
 import { cn } from "cn";
 import {
   Dialog,
@@ -116,24 +117,6 @@ const ViewAccount: FC<ViewAccountProps> = ({
 };
 
 export default ViewAccount;
-
-type DialogInfoRowProps = {
-  label: string;
-  value: string;
-  className?: string;
-};
-const DialogInfoRow: FC<DialogInfoRowProps> = ({ label, value, className }) => {
-  return (
-    <div className={cn("flex gap-1.5", className)}>
-      <label htmlFor={label} className="text-muted-foreground">
-        {label}:
-      </label>
-      <span id={label} className="font-medium text-right">
-        {value}
-      </span>
-    </div>
-  );
-};
 
 type StatProps = {
   label: string;
