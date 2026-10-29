@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { adminCreateAccountSchema } from "@/schemas/adminCreateAccountSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IUser } from "@/types";
 import { Button } from "@/components/ui/button";
-import Input from "@/app/_components/ui/Input";
 import { toast } from "@/components/ui/toast";
+import Input from "@/app/_components/ui/Input";
 import {
   Dialog,
   DialogContent,
@@ -17,31 +18,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-const schema = z
-  .object({
-    accName: z
-      .string()
-      .trim()
-      .min(2, "Account name must be at least 2 characters")
-      .max(20, "Account name cannot exceed 20 characters"),
-
-    identification: z.object({
-      birthId: z.string().trim(),
-      nid: z.string().trim(),
-      dateOfBirth: z.string().min(1, "Date of birth is required"),
-    }),
-  })
-  .superRefine((data, ctx) => {
-    if (!data.identification.birthId && !data.identification.nid) {
-      ctx.addIssue({
-        code: "custom",
-        path: ["identification", "nid"],
-        message: "NID or Birth ID is required",
-      });
-    }
-  });
-
-type FormData = z.infer<typeof schema>;
+type FormData = z.infer<typeof adminCreateAccountSchema>;
 
 interface CreateAccountProps {
   user: IUser | null;
@@ -58,7 +35,7 @@ const CreateAccount = ({ open, onClose, user }: CreateAccountProps) => {
     reset,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(adminCreateAccountSchema),
     defaultValues: {
       accName: "",
       identification: {
