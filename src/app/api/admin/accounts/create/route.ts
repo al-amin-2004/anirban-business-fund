@@ -5,7 +5,7 @@ import AccountModel from "@/models/Account";
 import UserModel from "@/models/User";
 import { generateUniqueAccountNumber } from "@/helpers/generateAccountNumber";
 
-export async function POST(req: Request) {
+export async function POST(request: Request) {
   try {
     await dbConnect();
 
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const { userId, accName, identification } = await req.json();
+    const { userId, accName, identification } = await request.json();
     if (!userId || !accName || !identification) {
       return Response.json(
         { success: false, message: "Missing data" },
