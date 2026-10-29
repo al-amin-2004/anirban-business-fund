@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useEffect } from "react";
-import { adminUpdateAccountSchema } from "@/schemas/adminUpdateAccountScema";
+import { adminUpdateAccountSchema } from "@/schemas/adminUpdateAccountSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toast";

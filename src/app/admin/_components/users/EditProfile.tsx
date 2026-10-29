@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useEffect, useState } from "react";
-import { adminUpdateUserSchema } from "@/schemas/adminUpdateUserScema";
+import { adminUpdateUserSchema } from "@/schemas/adminUpdateUserSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { blood, country, gender } from "@/constants/user";
 import { Button } from "@/components/ui/button";
