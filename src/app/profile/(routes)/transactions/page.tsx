@@ -62,23 +62,23 @@ const Page = () => {
         description="Showing your all transactions with a clear view."
       />
 
-      <div className="hidden lg:flex items-center justify-end gap-2.5">
+      <div className="flex items-center justify-end gap-2.5">
         <LayoutGrid
           size={34}
-          className={`cursor-pointer p-1.5 border rounded-md ${
+          className={`cursor-pointer p-1.5 border rounded-md hidden lg:block ${
             isGrid && "bg-muted-foreground/10"
           }`}
           onClick={() => setIsGrid(true)}
         />
         <List
           size={34}
-          className={`cursor-pointer p-1.5 border rounded-md ${
+          className={`cursor-pointer p-1.5 border rounded-md hidden lg:block ${
             !isGrid && "bg-muted-foreground/10"
           }`}
           onClick={() => setIsGrid(false)}
         />
 
-        {"/"}
+        <span className="hidden lg:block">/</span>
 
         <Select
           className="w-auto"
@@ -95,7 +95,7 @@ const Page = () => {
           ))}
         </Select>
 
-        {"/"}
+        <span>/</span>
 
         <Input
           id="filterDate"
