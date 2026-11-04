@@ -6,21 +6,22 @@ import { EllipsisVertical } from "lucide-react";
 import { useAllAccounts } from "@/providers/AllAccountsContext";
 import { Option, Select } from "@/app/_components/ui/Select";
 import { accStatus } from "@/constants/account";
+import { useAllUsers } from "@/providers/AllUsersContext";
+import { createMapById } from "@/helpers/createMapById";
+import { cn } from "cn";
 import PagesTitle from "@/app/_components/ui/PagesTitle";
 import Input from "@/app/_components/ui/Input";
-
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import ViewAccount from "../../_components/ViewAccount";
-import EditAccount from "../../_components/EditAccount";
-import ChangeStatus from "../../_components/ChangeStatus";
-import { useAllUsers } from "@/providers/AllUsersContext";
-import { createMapById } from "@/helpers/createMapById";
-import { cn } from "cn";
+
+import ViewAccount from "../../_components/accounts/ViewAccount";
+import EditAccount from "../../_components/accounts/EditAccount";
+import ChangeStatus from "../../_components/accounts/ChangeStatus";
+import Deposit from "../../_components/accounts/Deposit";
 
 const Page = () => {
   const { allAccounts } = useAllAccounts();
@@ -33,6 +34,7 @@ const Page = () => {
   const [viewAccount, setViewAccount] = useState<IAccount | null>(null);
   const [editAccount, setEditAccount] = useState<IAccount | null>(null);
   const [changeStatus, setChangeStatus] = useState<IAccount | null>(null);
+  const [deposit, setDeposit] = useState<IAccount | null>(null);
 
   const filteredAccounts = useMemo(() => {
     return allAccounts.filter((account) => {
@@ -141,6 +143,9 @@ const Page = () => {
                       >
                         Change Status
                       </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => setDeposit(account)}>
+                        Deposit
+                      </DropdownMenuItem>
                       <DropdownMenuItem disabled>
                         Delete Account
                       </DropdownMenuItem>
@@ -171,6 +176,11 @@ const Page = () => {
         open={!!changeStatus}
         onClose={() => setChangeStatus(null)}
         account={changeStatus}
+      />
+      <Deposit
+        open={!!deposit}
+        onClose={() => setDeposit(null)}
+        account={deposit}
       />
     </main>
   );
