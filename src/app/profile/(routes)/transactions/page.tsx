@@ -133,7 +133,14 @@ const Page = () => {
               <div className="text-sm">
                 <div className="flex justify-between mb-1">
                   <p>Amount: {transaction.amount}</p>
-                  <p>Month: {transaction.month}</p>
+                  <p>
+                    Month:{" "}
+                    {transaction.month &&
+                      new Date(transaction.month).toLocaleDateString("en-GB", {
+                        month: "short",
+                        year: "numeric",
+                      })}
+                  </p>
                 </div>
                 <div className="flex justify-between mb-1">
                   <p className="capitalize">Method: {transaction.method}</p>
