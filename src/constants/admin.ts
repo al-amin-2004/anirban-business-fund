@@ -2,6 +2,7 @@ import { IProfileSidebarItems } from "./profile";
 import {
   ArrowLeftRight,
   BadgeQuestionMark,
+  Hourglass,
   HouseCog,
   LayoutDashboard,
   Megaphone,
@@ -28,6 +29,11 @@ export const adminSidebarItems: IProfileSidebarItems[] = [
   {
     title: "Finance",
     items: [
+      {
+        label: "All Requests",
+        icon: Hourglass,
+        link: "/abf-requests",
+      },
       {
         label: "All Transactions",
         icon: ArrowLeftRight,
