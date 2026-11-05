@@ -3,16 +3,16 @@
 import { useMemo, useState } from "react";
 import { IUser } from "@/types";
 import { EllipsisVertical } from "lucide-react";
+import { useAllUsers } from "@/providers/AllUsersContext";
 import PagesTitle from "@/app/_components/ui/PagesTitle";
 import Input from "@/app/_components/ui/Input";
-
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useAllUsers } from "@/providers/AllUsersContext";
+
 import ViewProfile from "../../_components/users/ViewProfile";
 import EditProfile from "../../_components/users/EditProfile";
 import ChangeRole from "../../_components/users/ChangeRole";
