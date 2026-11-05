@@ -5,6 +5,7 @@ import { IUser } from "@/types";
 import { EllipsisVertical } from "lucide-react";
 import { useAllUsers } from "@/providers/AllUsersContext";
 import { useAllAccounts } from "@/providers/AllAccountsContext";
+import Loader from "@/components/ui/loader";
 import PagesTitle from "@/app/_components/ui/PagesTitle";
 import Input from "@/app/_components/ui/Input";
 import {
@@ -19,7 +20,7 @@ import EditProfile from "../../_components/users/EditProfile";
 import ChangeRole from "../../_components/users/ChangeRole";
 
 const Page = () => {
-  const { allUsers } = useAllUsers();
+  const { allUsers, loading } = useAllUsers();
   const { allAccounts } = useAllAccounts();
   const [search, setSearch] = useState("");
 
@@ -41,6 +42,14 @@ const Page = () => {
       return allMembers && matchSearch;
     });
   }, [allUsers, search]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-[calc(100vh-85px)]">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <main className="space-y-4 pb-4">

@@ -9,6 +9,7 @@ import { EllipsisVertical } from "lucide-react";
 import { useAllUsers } from "@/providers/AllUsersContext";
 import PagesTitle from "@/app/_components/ui/PagesTitle";
 import Input from "@/app/_components/ui/Input";
+import Loader from "@/components/ui/loader";
 import ViewProfile from "../../_components/users/ViewProfile";
 import EditProfile from "../../_components/users/EditProfile";
 import ChangeRole from "../../_components/users/ChangeRole";
@@ -21,7 +22,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const Page = () => {
-  const { allUsers } = useAllUsers();
+  const { allUsers, loading } = useAllUsers();
   const [search, setSearch] = useState<string>("");
   const [roleFilter, setRoleFilter] = useState<"all" | Role>("all");
 
@@ -44,6 +45,14 @@ const Page = () => {
       return matchSearch && matchRole;
     });
   }, [allUsers, search, roleFilter]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-[calc(100vh-85px)]">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <main className="space-y-4 pb-4">

@@ -9,9 +9,10 @@ import { CalendarFold, LayoutGrid, List } from "lucide-react";
 import { cn } from "cn";
 import PagesTitle from "@/app/_components/ui/PagesTitle";
 import Input from "@/app/_components/ui/Input";
+import Loader from "@/components/ui/loader";
 
 const Page = () => {
-  const { allTransactions } = useAllTransactions();
+  const { allTransactions, loading } = useAllTransactions();
   const [isGrid, setIsGrid] = useState<boolean>(true);
 
   const [requestType, setRequestType] = useState<"all" | RequestTypes>("all");
@@ -31,6 +32,14 @@ const Page = () => {
       return matchRequestType && matchFilterDate;
     });
   }, [allTransactions, requestType, filterDate]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-[calc(100vh-85px)]">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4 pb-4">

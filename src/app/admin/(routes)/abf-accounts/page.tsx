@@ -9,6 +9,7 @@ import { accStatus } from "@/constants/account";
 import { useAllUsers } from "@/providers/AllUsersContext";
 import { createMapById } from "@/helpers/createMapById";
 import { cn } from "cn";
+import Loader from "@/components/ui/loader";
 import PagesTitle from "@/app/_components/ui/PagesTitle";
 import Input from "@/app/_components/ui/Input";
 import {
@@ -24,7 +25,7 @@ import ChangeStatus from "../../_components/accounts/ChangeStatus";
 import Deposit from "../../_components/accounts/Deposit";
 
 const Page = () => {
-  const { allAccounts } = useAllAccounts();
+  const { allAccounts, loading } = useAllAccounts();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<"all" | Status>("all");
 
@@ -50,6 +51,14 @@ const Page = () => {
       return matchSearch && matchStatus;
     });
   }, [allAccounts, search, statusFilter]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-[calc(100vh-85px)]">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <main className="space-y-4 pb-4">
