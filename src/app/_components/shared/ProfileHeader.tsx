@@ -78,7 +78,7 @@ const ProfileHeader = () => {
                   <h2 className="font-semibold text-sm leading-4 tracking-wider">
                     {user?.fullName}
                   </h2>
-                  <p className="text-xs text-primary">{user?.role}</p>
+                  <p className="text-xs text-accent ">{user?.role}</p>
                 </div>
                 <ChevronDown className="hidden md:block size-5 ms-2.5" />
               </div>
