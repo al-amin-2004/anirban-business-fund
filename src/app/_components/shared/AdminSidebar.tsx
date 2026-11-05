@@ -49,7 +49,8 @@ const AdminSidebar = () => {
                 <h4 className="text-xs text-primary font-bold">{title}</h4>
               )}
               {items.map((item) => {
-                const navActive = pathname === item.link;
+                const navActive = pathname === `/admin${item.link}`;
+
                 return (
                   <li key={item.label} onClick={() => setNavOpen(false)}>
                     <Link
@@ -57,7 +58,10 @@ const AdminSidebar = () => {
                       className={cn(
                         "flex items-center gap-1 rounded ms-2 text-sm text-nowrap cursor-pointer",
                         { "hover:bg-slate-400/20": open },
-                        { "bg-primary": open && navActive },
+                        {
+                          "border-l-2 border-accent translate-x-1":
+                            open && navActive,
+                        },
                       )}
                     >
                       <div
