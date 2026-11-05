@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { IUser } from "@/types";
 import { EllipsisVertical } from "lucide-react";
 import { useAllUsers } from "@/providers/AllUsersContext";
+import { useAllAccounts } from "@/providers/AllAccountsContext";
 import PagesTitle from "@/app/_components/ui/PagesTitle";
 import Input from "@/app/_components/ui/Input";
 import {
@@ -19,6 +20,7 @@ import ChangeRole from "../../_components/users/ChangeRole";
 
 const Page = () => {
   const { allUsers } = useAllUsers();
+  const { allAccounts } = useAllAccounts();
   const [search, setSearch] = useState("");
 
   const [viewProfile, setViewProfile] = useState<IUser | null>(null);
@@ -79,7 +81,10 @@ const Page = () => {
                 <td className="px-2 border-x text-start">{member.fullName}</td>
                 <td className="px-2 border-x text-start">{member.username}</td>
                 <td className="px-2 border-x text-start">{member.email}</td>
-                <td className="px-2 border-x">1</td>
+                <td className="px-2 border-x">
+                  {allAccounts.filter((acc) => acc.userId === member._id)
+                    ?.length || 0}
+                </td>
                 <td className="px-2 border-x">
                   <DropdownMenu>
                     <DropdownMenuTrigger className="cursor-pointer">
