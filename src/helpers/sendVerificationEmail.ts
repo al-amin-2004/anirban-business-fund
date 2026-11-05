@@ -1,11 +1,22 @@
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT),
+  secure: true,
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
 
 export const sendVerificationEmail = async (email: string, code: string) => {
   try {
-    await resend.emails.send({
-      from: "Anirban Business Fund <onboarding@resend.dev>",
+    await transporter.verify();
+    console.log("SMTP connection successful!");
+
+    await transporter.sendMail({
+      from: `"Anirban Business Fund" <${process.env.SMTP_USER}>`,
       to: email,
       subject: "Verify your email — Anirban Business Fund",
       html: `
@@ -274,7 +285,7 @@ export const sendVerificationEmail = async (email: string, code: string) => {
 
     return { success: true, message: "Verification email sent successfully" };
   } catch (error) {
-    console.error("Error sending verification email:", error);
+    console.error("Error while sending mail:", error);
     return { success: false, message: "Failed to send verification email" };
   }
 };
