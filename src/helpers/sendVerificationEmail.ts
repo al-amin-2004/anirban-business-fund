@@ -1,12 +1,12 @@
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT),
+  host: process.env.NODEMAILER_SMTP_HOST,
+  port: Number(process.env.NODEMAILER_SMTP_PORT),
   secure: true,
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
+    user: process.env.NODEMAILER_SMTP_USER,
+    pass: process.env.NODEMAILER_SMTP_PASS,
   },
 });
 
@@ -16,7 +16,7 @@ export const sendVerificationEmail = async (email: string, code: string) => {
     console.log("SMTP connection successful!");
 
     await transporter.sendMail({
-      from: `"Anirban Business Fund" <${process.env.SMTP_USER}>`,
+      from: `"Anirban Business Fund" <${process.env.NODEMAILER_SMTP_USER}>`,
       to: email,
       subject: "Verify your email — Anirban Business Fund",
       html: `
