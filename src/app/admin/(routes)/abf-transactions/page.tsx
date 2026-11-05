@@ -37,7 +37,7 @@ const Page = () => {
       {/* Page heading */}
       <PagesTitle
         title="All Transactions"
-        description="Showing your all member's transactions with a clear view."
+        description="Showing all member's transactions with a clear view."
       />
 
       <div className="flex items-center justify-end gap-2.5">
