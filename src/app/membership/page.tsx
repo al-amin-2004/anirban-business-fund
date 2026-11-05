@@ -8,7 +8,7 @@ import MembershipOverview from "./_components/sections/MembershipOverview";
 import MembershipProcess from "./_components/sections/MembershipProcess";
 import MembershipRequirements from "./_components/sections/MembershipRequirements";
 
-const page = () => {
+const Page = () => {
   return (
     <>
       <Header />
@@ -24,4 +24,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
