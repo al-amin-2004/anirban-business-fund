@@ -39,7 +39,7 @@ export const AllTransactionsProvider = ({
 
       const data = await res.json();
 
-      if (data.ok && Array.isArray(data.transactions)) {
+      if (data.success && Array.isArray(data.transactions)) {
         setAllTransactions(data.transactions);
       } else {
         setAllTransactions([]);
