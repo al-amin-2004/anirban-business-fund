@@ -94,7 +94,7 @@ const Page = () => {
 
       <section
         className={cn("border rounded-xl overflow-hidden", {
-          "md:p-4 border-0 md:border grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 xxl:grid-cols-4 gap-3":
+          "md:p-4 border-0 md:border grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3":
             isGrid,
         })}
       >
