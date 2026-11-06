@@ -33,10 +33,21 @@ export const dateOfBirthValidation = z
     { message: "Date of birth cannot be in the future." },
   );
 
-  export const accountNameValidation = z.object({
+export const accountNameValidation = z.object({
   accountName: z
     .string()
     .trim()
     .min(2, "Account name is required")
     .max(20, "Account name must be 20 characters or fewer"),
 });
+
+export const amount = z
+  .number()
+  .finite("Amount must be a valid number")
+  .int("Amount must be a whole number")
+  .positive("Amount must be greater than zero")
+  .max(1_000_000, "Amount the allowed limit 1 million");
+
+export const month = z
+  .string()
+  .regex(/^\d{4}-(0[1-9]|1[0-2])$/, "Select a valid contribution month");

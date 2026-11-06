@@ -10,6 +10,7 @@ import {
   Settings,
   User,
   UserGroup,
+  Wallet,
 } from "lucide-react";
 
 type SidebarItemsTypes = {
@@ -40,6 +41,7 @@ export const profileSidebarItems: IProfileSidebarItems[] = [
         link: "/profile/transactions",
       },
       { label: "Passbook", icon: Book, link: "/profile/passbook" },
+      { label: "My Wallet", icon: Wallet, link: "/profile/wallet" },
     ],
   },
   {
