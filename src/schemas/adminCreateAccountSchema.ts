@@ -6,7 +6,7 @@ export const adminCreateAccountSchema = z
       .string()
       .trim()
       .min(2, "Account name must be at least 2 characters")
-      .max(20, "Account name cannot exceed 20 characters"),
+      .max(30, "Account name cannot exceed 30 characters"),
 
     identification: z.object({
       birthId: z.string().trim(),

@@ -8,7 +8,7 @@ const accountSchema = new Schema<IAccount>(
 
     accName: {
       type: String,
-      maxlength: [20, "Name can't be more than 20 characters."],
+      maxlength: [30, "Name can't be more than 30 characters."],
       required: [true, "Please provide an Account name."],
     },
     accNumber: {

@@ -43,10 +43,10 @@ export async function POST(request: Request) {
     if (
       typeof accName !== "string" ||
       accName.trim().length < 2 ||
-      accName.trim().length > 20
+      accName.trim().length > 30
     ) {
       return Response.json(
-        { success: false, message: "Account name must be 2–20 characters" },
+        { success: false, message: "Account name must be 2–30 characters" },
         { status: 400 },
       );
     }
