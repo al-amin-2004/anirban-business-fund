@@ -47,7 +47,7 @@ const Header: FC = () => {
           </ul>
 
           <Link href="/profile/dashboard" className="hidden lg:block">
-            <Button variant="defaultAnimation">
+            <Button variant="primaryAnimation">
               My Profile <MoveRight className="ms-1.5" />
             </Button>
           </Link>

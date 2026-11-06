@@ -203,6 +203,7 @@ export default function Contact() {
                 </div>
 
                 <Button
+                  variant="primary"
                   type="submit"
                   className="w-full h-11 text-sm md:text-base font-semibold"
                 >
