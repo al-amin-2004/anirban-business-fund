@@ -3,7 +3,7 @@ import {
   requestStatus,
   requestTypes,
 } from "@/constants/account";
-import { IRequest } from "@/types/request";
+import { IRequest } from "@/types";
 import mongoose, { Schema } from "mongoose";
 
 const requestSchema = new Schema<IRequest>(

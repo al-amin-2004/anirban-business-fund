@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useAccounts } from "@/providers/AccountContext";
 import { formatCurrency } from "@/helpers/formatCurrency";
 import { Separator } from "@/components/ui/separator";
-import { IRequest } from "@/types/request";
+import { IRequest } from "@/types";
 import { cn } from "cn";
 import PagesTitle from "@/app/_components/ui/PagesTitle";
 import Loader from "@/components/ui/loader";
