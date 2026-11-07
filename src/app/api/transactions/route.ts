@@ -25,7 +25,7 @@ export async function GET() {
 
     const transactions = await TransactionModel.find().lean();
 
-    return Response.json({ success: true, transactions });
+    return Response.json({ success: true, transactions }, { status: 200 });
   } catch (error) {
     console.error(error);
     return Response.json(

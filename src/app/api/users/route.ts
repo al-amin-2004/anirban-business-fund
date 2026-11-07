@@ -23,7 +23,7 @@ export async function GET() {
 
     const users = await UserModel.find({}).select("-password").lean();
 
-    return Response.json({ success: true, users });
+    return Response.json({ success: true, users }, { status: 200 });
   } catch (error) {
     console.error("users api route error:", error);
     return Response.json(

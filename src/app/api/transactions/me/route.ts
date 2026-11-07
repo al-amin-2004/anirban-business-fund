@@ -53,7 +53,7 @@ export async function GET(request: Request) {
       .sort({ createdAt: -1 })
       .lean();
 
-    return Response.json({ success: true, transactions });
+    return Response.json({ success: true, transactions }, { status: 200 });
   } catch (error) {
     console.error(error);
 

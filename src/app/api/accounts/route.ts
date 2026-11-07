@@ -24,7 +24,7 @@ export async function GET() {
 
     const accounts = await AccountModel.find().lean();
 
-    return Response.json({ success: true, accounts });
+    return Response.json({ success: true, accounts }, { status: 200 });
   } catch (error) {
     console.error("account api route error", error);
     return Response.json(

@@ -25,7 +25,7 @@ export async function GET() {
       );
     }
 
-    return Response.json({ success: true, user });
+    return Response.json({ success: true, user }, { status: 200 });
   } catch (error) {
     console.error("me route error:", error);
     return Response.json(

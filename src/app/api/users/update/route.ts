@@ -127,10 +127,10 @@ export async function PATCH(request: Request) {
       }
     }
 
-    return Response.json({
-      success: true,
-      message: "Profile updated successfully",
-    });
+    return Response.json(
+      { success: true, message: "Profile updated successfully" },
+      { status: 200 },
+    );
   } catch (error) {
     console.error("user update error:", error);
     return Response.json(
