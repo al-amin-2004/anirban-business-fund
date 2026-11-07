@@ -35,7 +35,6 @@ import {
   Phone,
   ShieldCheck,
   UserRound,
-  UsersRound,
   VenusAndMars,
 } from "lucide-react";
 
