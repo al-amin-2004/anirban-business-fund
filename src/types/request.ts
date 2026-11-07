@@ -21,6 +21,6 @@ export interface IRequest {
   status: RequestStatus;
   processedBy?: ObjectId | string;
   processedAt?: Date;
-  createdAt?: Date;
+  createdAt: Date;
   rejectionReason?: string;
 }

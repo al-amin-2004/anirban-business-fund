@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { FC, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PaymentMethods } from "@/types";
 import { useForm } from "react-hook-form";
@@ -9,12 +9,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAccounts } from "@/providers/AccountContext";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toast";
-import { Send, CreditCard, CircleCheck, CheckCircle2 } from "lucide-react";
 import { cn } from "cn";
-import z from "zod";
 import ErrorMessage from "@/app/_components/ui/ErrorMessage";
 import PagesTitle from "@/app/_components/ui/PagesTitle";
 import Input from "@/app/_components/ui/Input";
+import z from "zod";
+import {
+  Send,
+  CreditCard,
+  CircleCheck,
+  CheckCircle2,
+  Check,
+  Copy,
+} from "lucide-react";
 import {
   BankIcon,
   BkashIcon,
@@ -40,7 +47,7 @@ interface PaymentMethodProps {
 const paymentMethods: PaymentMethodProps[] = [
   {
     id: "bkash",
-    name: "bKash",
+    name: "BKash",
     description: "Mobile banking",
     icon: BkashIcon,
   },
@@ -225,6 +232,77 @@ const Page = () => {
             )}
           </div>
 
+          {/* Payment Information */}
+          {selectedPaymentMethod && (
+            <div className="mt-4 overflow-hidden rounded-xl border">
+              {/* Payment Info Heading */}
+              <div className="flex items-center justify-between border-b px-3 py-2">
+                <div>
+                  <h3 className="text-sm">Payment Information</h3>
+                  <p className="text-xs text-muted-foreground">
+                    Send your payment to the following account
+                  </p>
+                </div>
+
+                <span
+                  className={cn(
+                    "rounded-full px-3 py-1 text-xs font-semibold capitalize border bg-primary/30 border-primary",
+                    {
+                      "bg-pink-500/30 border-pink-600 text-pink-500":
+                        selectedPaymentMethod === "bkash",
+                    },
+                    {
+                      "bg-orange-500/30 border-orange-600 text-orange-500":
+                        selectedPaymentMethod === "nagad",
+                    },
+                    {
+                      "bg-purple-500/30 border-purple-600 text-purple-500":
+                        selectedPaymentMethod === "rocket",
+                    },
+                  )}
+                >
+                  {selectedPaymentMethod}
+                </span>
+              </div>
+
+              <div className="space-y-2 p-3">
+                {(selectedPaymentMethod === "bkash" ||
+                  selectedPaymentMethod === "nagad" ||
+                  selectedPaymentMethod === "rocket") && (
+                  <>
+                    <PaymentInfoRow
+                      label="Account Name"
+                      value="Anirban Business Fund"
+                    />
+                    <PaymentInfoRow
+                      label={`${selectedPaymentMethod} Number (Personal)`}
+                      value="01609305655"
+                      copy
+                    />
+                  </>
+                )}
+
+                {selectedPaymentMethod === "bank" && (
+                  <p className="text-center">This service not available now.</p>
+                )}
+
+                {selectedPaymentMethod === "card" && (
+                  <p className="text-center">This service not available now.</p>
+                )}
+
+                <div className="rounded-lg bg-emerald-100/10 p-3">
+                  <p className="font-semibold text-destructive">
+                    Important Instructions
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Please send the exact amount to the account above and enter
+                    the correct Transaction ID in the deposit form.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Transaction */}
           <div className="space-y-2">
             <label htmlFor="transactionId">
@@ -322,3 +400,42 @@ const Page = () => {
 };
 
 export default Page;
+
+interface PaymentInfoRow {
+  label: string;
+  value: string;
+  copy?: boolean;
+}
+const PaymentInfoRow: FC<PaymentInfoRow> = ({ label, value, copy = false }) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      console.error("Failed to copy");
+    }
+  };
+
+  return (
+    <div className="flex items-center justify-between gap-3 rounded-lg px-2 py-1">
+      <div>
+        <p className="text-xs text-muted-foreground capitalize">{label}</p>
+        <p className="truncate text-sm font-semibold">{value}</p>
+      </div>
+
+      {copy && (
+        <button
+          type="button"
+          onClick={handleCopy}
+          className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700 transition hover:bg-emerald-100 cursor-pointer"
+          aria-label={`Copy ${label}`}
+        >
+          {copied ? <Check size={16} /> : <Copy size={16} />}
+        </button>
+      )}
+    </div>
+  );
+};

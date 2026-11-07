@@ -1,5 +1,13 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useAccounts } from "@/providers/AccountContext";
+import { formatCurrency } from "@/helpers/formatCurrency";
+import { Separator } from "@/components/ui/separator";
+import { IRequest } from "@/types/request";
+import { cn } from "cn";
+import PagesTitle from "@/app/_components/ui/PagesTitle";
+import Loader from "@/components/ui/loader";
 import Link from "next/link";
 import {
   Wallet,
@@ -12,57 +20,38 @@ import {
   CircleArrowDown,
   CircleArrowUp,
   Send,
+  CalendarDays,
 } from "lucide-react";
-import PagesTitle from "@/app/_components/ui/PagesTitle";
-import { useAccounts } from "@/providers/AccountContext";
-import { Separator } from "@/components/ui/separator";
-import Loader from "@/components/ui/loader";
-
-const pendingRequests = [
-  {
-    id: "ABF-DEP-1025",
-    type: "Deposit",
-    description: "Monthly Deposit",
-    amount: 2000,
-    date: "Nov 05, 2026",
-    status: "Pending",
-    icon: CircleArrowDown,
-    color: "text-emerald-600",
-    bg: "bg-emerald-50",
-  },
-  {
-    id: "ABF-WTH-1026",
-    type: "Withdrawal",
-    description: "Personal Withdrawal",
-    amount: 1500,
-    date: "Nov 03, 2026",
-    status: "Pending",
-    icon: CircleArrowUp,
-    color: "text-blue-600",
-    bg: "bg-blue-50",
-  },
-  {
-    id: "ABF-TRF-1027",
-    type: "Transfer",
-    description: "To Rahman Bhai",
-    amount: 1000,
-    date: "Oct 30, 2026",
-    status: "Pending",
-    icon: Send,
-    color: "text-violet-600",
-    bg: "bg-violet-50",
-  },
-];
 
 const Page = () => {
   const { activeAccount, loading } = useAccounts();
+  const [pendingReq, setPendingReq] = useState<IRequest[]>([]);
 
-  const formatCurrency = (amount: number) =>
-    new Intl.NumberFormat("en-BD", {
-      style: "currency",
-      currency: "BDT",
-      maximumFractionDigits: 2,
-    }).format(amount);
+  useEffect(() => {
+    const accountId = activeAccount?._id;
+    if (!accountId || loading) return;
+
+    const fetchHistories = async () => {
+      try {
+        const params = new URLSearchParams({
+          accountId,
+          status: "pending",
+        });
+
+        const res = await fetch(`/api/requests/me?${params.toString()}`);
+        const data = await res.json();
+
+        if (!res.ok) {
+          console.error(data.message);
+        }
+
+        setPendingReq(data.requests);
+      } catch (error) {
+        console.error("Api error", error);
+      }
+    };
+    fetchHistories();
+  }, [activeAccount, loading]);
 
   if (loading) {
     return (
@@ -126,10 +115,7 @@ const Page = () => {
         </Link>
 
         {/* Withdraw */}
-        <Link
-          href="/profile/wallet/withdraw"
-          className="group relative flex items-center gap-4 rounded-2xl border bg-card p-4 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md sm:flex-col sm:items-start sm:p-5"
-        >
+        <div className="group relative flex items-center gap-4 rounded-2xl border bg-card p-4 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md sm:flex-col sm:items-start sm:p-5 cursor-not-allowed">
           <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#176C72] shadow-md shadow-teal-900/10 transition group-hover:scale-105">
             <ArrowUp size={25} />
           </div>
@@ -145,13 +131,10 @@ const Page = () => {
             size={19}
             className="text-emerald-700 sm:absolute sm:bottom-5 sm:right-5"
           />
-        </Link>
+        </div>
 
         {/* Transfer */}
-        <Link
-          href="/profile/wallet/transfer"
-          className="group relative flex items-center gap-4 rounded-2xl border bg-card p-4 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-violet-200 hover:shadow-md sm:flex-col sm:items-start sm:p-5"
-        >
+        <div className="group relative flex items-center gap-4 rounded-2xl border bg-card p-4 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-violet-200 hover:shadow-md sm:flex-col sm:items-start sm:p-5 cursor-not-allowed">
           <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#087447] shadow-md shadow-emerald-900/10 transition group-hover:scale-105">
             <ArrowLeftRight size={25} />
           </div>
@@ -167,7 +150,7 @@ const Page = () => {
             size={19}
             className="text-emerald-700 sm:absolute sm:bottom-5 sm:right-5"
           />
-        </Link>
+        </div>
       </section>
 
       {/* Pending Requests */}
@@ -184,50 +167,107 @@ const Page = () => {
         </div>
 
         {/* Requests */}
-        {pendingRequests.length < 1 ? (
+        {pendingReq.length <= 0 ? (
           <div className="p-2.5 text-center text-sm text-muted-foreground">
             No Request yet
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-3 p-4 sm:grid-cols-2 sm:p-6 xl:grid-cols-3">
-            {pendingRequests.map((request) => {
-              const Icon = request.icon;
-
-              return (
-                <div
-                  key={request.id}
-                  className="rounded-xl border bg-[#087447] p-4 transition hover:border-emerald-200"
-                >
-                  <div className="flex items-start justify-between gap-3">
+          <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 sm:p-6 xl:grid-cols-3">
+            {pendingReq.map((request) => (
+              <div
+                key={request._id}
+                className="group rounded-2xl border bg-card p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-emerald-500/40 hover:shadow-md"
+              >
+                {/* Header */}
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
                     <div
-                      className={`flex size-10 shrink-0 items-center justify-center rounded-xl ${request.bg} ${request.color}`}
+                      className={cn(
+                        "flex size-11 shrink-0 items-center justify-center rounded-xl",
+                        {
+                          "bg-emerald-500/10 text-emerald-600":
+                            request.requestType === "deposit",
+                          "bg-blue-500/10 text-blue-600":
+                            request.requestType === "withdraw",
+                          "bg-violet-500/10 text-violet-600":
+                            request.requestType === "transfer",
+                        },
+                      )}
                     >
-                      <Icon size={21} />
+                      {request.requestType === "deposit" && (
+                        <CircleArrowDown size={21} />
+                      )}
+                      {request.requestType === "withdraw" && (
+                        <CircleArrowUp size={21} />
+                      )}
+                      {request.requestType === "transfer" && <Send size={21} />}
+                    </div>
+
+                    <div>
+                      <p className="text-sm font-semibold capitalize">
+                        {request.requestType} Request
+                      </p>
+                      <p className="mt-0.5 text-xs text-muted-foreground">
+                        #{request._id?.slice(-8)}
+                      </p>
                     </div>
                   </div>
 
-                  <div className="mt-4">
-                    <p className="text-sm font-semibold">
-                      {request.type} Request
-                    </p>
+                  <span className="rounded-full bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-600">
+                    Pending
+                  </span>
+                </div>
 
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      {request.description}
-                    </p>
+                {/* Amount */}
+                <div className="mt-5 rounded-xl bg-muted/50 p-4">
+                  <p className="text-xs font-medium text-muted-foreground">
+                    Requested Amount
+                  </p>
+                  <p className="mt-1 text-2xl font-bold tracking-tight">
+                    {formatCurrency(request.amount)}
+                  </p>
+                </div>
 
-                    <p className="mt-3 text-xl font-bold tracking-tight">
-                      {formatCurrency(request.amount)}
-                    </p>
+                {/* Details */}
+                <div className="mt-4 space-y-3">
+                  <div className="flex items-center justify-between gap-3 text-sm">
+                    <span className="text-muted-foreground">Month</span>
+                    <span className="font-medium">{request.month || "—"}</span>
                   </div>
 
-                  <div className="mt-4 flex items-center justify-between border-t-2 pt-3">
-                    <span className="text-xs text-muted-foreground">
-                      {request.date}
+                  <div className="flex items-center justify-between gap-3 text-sm">
+                    <span className="text-muted-foreground">
+                      Payment Method
+                    </span>
+                    <span className="font-medium capitalize">
+                      {request.method || "—"}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-3 text-sm">
+                    <span className="text-muted-foreground">
+                      Transaction ID
+                    </span>
+                    <span className="max-w-[60%] truncate font-medium">
+                      {request.transactionId || "—"}
                     </span>
                   </div>
                 </div>
-              );
-            })}
+
+                {/* Footer */}
+                <div className="mt-5 flex items-center gap-2 border-t pt-4 text-xs text-muted-foreground">
+                  <CalendarDays size={14} />
+                  <span>
+                    Submitted{" "}
+                    {new Date(request.createdAt).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
         )}
       </section>
