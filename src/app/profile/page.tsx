@@ -360,38 +360,6 @@ const Profile = () => {
             </CardContent>
           </Card>
 
-          {/* Membership */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Membership</CardTitle>
-
-              <CardDescription>
-                Your current ABF membership status.
-              </CardDescription>
-            </CardHeader>
-
-            <CardContent>
-              <div className="flex items-center justify-between rounded-xl border bg-muted/20 p-3 sm:p-4">
-                <div className="flex items-center gap-3">
-                  <div className="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <UsersRound className="size-5" />
-                  </div>
-
-                  <div>
-                    <p className="font-semibold">Not a Member</p>
-
-                    <p className="text-xs text-muted-foreground">
-                      Apply for ABF membership
-                    </p>
-                  </div>
-                </div>
-
-                <Button variant="outline" size="sm">
-                  View
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
         </div>
 
         {/* RIGHT */}
